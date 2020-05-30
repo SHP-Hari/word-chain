@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#9F7AEF</color>
+    <color name="colorPrimaryDark">#A74CF2</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="black">#000000</color>
+    <color name="grey">#686868</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="lightgreen">#03dac4</color>
+    <color name="grey1">#66635f</color>
+    <color name="grey3">#a4a4a4</color>
+    <color name="floralwhite">#fff8ef</color>
+    <color name="grey2">#cccccc</color>
+    <color name="oldlace">#fff4e5</color>
+    <color name="lavender">#e0f1ed</color>
+    <color name="linen">#f4e5ee</color>
+    <color name="mistyrose">#f8e2e2</color>
+    <color name="grey4">#e4e4e4</color>
+    <color name="sandybrown">#f8be40</color>
+    <color name="greynew">#50000000</color>
+    <color name="goldenrod">#fec32f</color>
+    <color name="crimson">#f9313d</color>
+    <color name="facebookblue">#3c5997</color>
+    <color name="viewcolor">#78000000</color>
+    <color name="inprogress">#0B78D0</color>
+    <color name="completed">#008A07</color>
+    <color name="notattempted">#6C7684</color>
+    <color name="boarder_grey">#E0E0E0</color>
+    <color name="googleblue">#4784e6</color>
+
+    <color name="blue_overlay">#d1ecf1</color>
+    <color name="green_overlay">#d4edd9</color>
+    <color name="red_overlay">#f8d7da</color>
+    <color name="yellow_overlay">#fff3cd</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="whiteTextColor">#fff</color>
+    <color name="primaryTextColor">#f67618</color>
+    <color name="loginBkColor">#f0f0f0</color>
+
+    <!--colros for card-->
+    <color name="whiteCardColor">#fff</color>
+    <color name="google_shape_color">#DB4437</color>
+    <color name="claasified_tile">#F9EECA</color>
+    <color name="claasified_selected_tile">#99DACA</color>
+    <color name="pin_background">#FEF8E2</color>
+    <color name="pin_border">#F8931D</color>
+    <color name="word_chain_user_input">#332FA2</color>
+    <color name="colorTextBlack">#333333</color>
+    <color name="colorTextHint">#e1e1e1</color>
+    <color name="colorTextInfo">#9b9b9b</color>
+    <color name="colorGreen">#A5DE40</color>
+    <color name="navColor">#80FFFFFF</color>
+
+</resources>

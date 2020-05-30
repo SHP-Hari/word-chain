@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Word Chain</string>
+    <string name="userWelcomeText">Hello There!</string>
+    <string name="userWelcomeSloganText">Let\'s Practise English Vocabulary</string>
+    <string name="playGame">Play Game</string>
+    <string name="playGameDescription">Play Game Description</string>
+    <string name="howToPlayText">How To Play</string>
+    <string name="howToPlayDescription">Description how to play</string>
+    <string name="activateProText">Activate Pro</string>
+    <string name="activateProDescription">Description Activate pro</string>
+    <string name="changelang">Change Language</string>
+    <string name="playStep1">Step 01</string>
+    <string name="playStepInfo1">Information about step 1</string>
+    <string name="playStep2">Step 02</string>
+    <string name="playStep3">Step 03</string>
+    <string name="playStep4">Step 04</string>
+    <string name="playStepInfo2">info 2</string>
+    <string name="playStepInfo3">info 3</string>
+    <string name="playStepInfo4">info 4</string>
+    <string name="languageLabel">Select Preferred Language</string>
+    <string name="lang">Please Select</string>
+    <string name="playText">WORD CHAIN</string>
+    <string name="submitText">Submit</string>
+</resources>

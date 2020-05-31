@@ -163,7 +163,6 @@ public class WordChainActivity extends AppCompatActivity {
             spanString.setSpan(new ForegroundColorSpan(Color.parseColor(colorHex)), matcher.start(), matcher.end(), 0);
             spanString.setSpan(new StyleSpan(Typeface.BOLD), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             spanString.setSpan(new RelativeSizeSpan(1.5f), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            spanString.setSpan(new Ani, matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         appWord.setText(spanString);
         Log.d("TAG", "start Word : "+suggestedWord);

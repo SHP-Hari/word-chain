@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.WordChainActivity"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.HowToPlay" />
         <activity android:name=".ui.HomeActivity" />
         <activity

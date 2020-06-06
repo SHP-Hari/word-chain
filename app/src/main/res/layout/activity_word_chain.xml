@@ -22,16 +22,57 @@
             android:layout_marginBottom="@dimen/play_mainMarginBottom"
             android:layout_gravity="center">
 
-            <TextView
-                android:id="@+id/tvplayTitle"
+            <LinearLayout
+                android:id="@+id/scoreLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/antic"
-                android:gravity="center"
-                android:text="@string/playText"
-                android:textColor="#FFFFFF"
-                android:textSize="50sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/tv_score"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bangers"
+                        android:text="Score : "
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="normal"/>
+                    <TextView
+                        android:id="@+id/tv_words_completed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bangers"
+                        android:text="Words Completed : "
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="normal"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/tv_duration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/antic"
+                        android:gravity="center"
+                        android:text="00:30"
+                        android:textColor="#FFFFFF"
+                        android:textSize="50sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
         <FrameLayout

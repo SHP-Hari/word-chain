@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.PersistableBundle;
 import android.text.InputType;
@@ -40,6 +43,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,6 +54,9 @@ import lk.applife.english.wordchain.utill.FCS;
 public class WordChainActivity extends AppCompatActivity {
 
     public static final String WORDS_TEXT_FILE_PATH = "words/words_alpha.txt";
+    public static final long COUNTDOWN_IN_MILLIS = 30000;
+    public static final int MARKS_PER_CORRECT_WORD = 5;
+    public static final long MAXIMUM_GAME_PLAY_TIME = 120000;
     EditText userInputEditText;
     Button submit;
     HorizontalScrollView appWordHorizontalScroll;
@@ -58,14 +65,24 @@ public class WordChainActivity extends AppCompatActivity {
     LinearLayout loadingLayout;
     LinearLayout mainLayout;
     LinearLayout correctAnimationLayout;
+    LinearLayout scoreLayout;
     TextView appWord;
     FrameLayout animationFrame;
+    TextView score;
+    TextView wordsCompleted;
+    TextView duration;
+
+    private ColorStateList textColorDefaultCountdown;
 
     ArrayList<String> wordList;
     String currentWordApp;
     String currentWordUser;
     String lastLetterOfCurrentWordApp;
     String lastLetterOfCurrentWordUser;
+    private int wordsCounter = 0;
+    private int gameScore = 0;
+    private CountDownTimer countDownTimer;
+    private long timeLeftInMillis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,10 +109,15 @@ public class WordChainActivity extends AppCompatActivity {
         userWordLayout = (LinearLayout) findViewById(R.id.userWordLayout);
         loadingLayout = (LinearLayout) findViewById(R.id.loadingLayout);
         mainLayout = (LinearLayout) findViewById(R.id.mainWordsLayout);
+        scoreLayout = (LinearLayout) findViewById(R.id.scoreLayout);
         correctAnimationLayout = (LinearLayout) findViewById(R.id.correctAnimationLayout);
         appWord = (TextView) findViewById(R.id.tvSuggestedWord);
+        score = (TextView) findViewById(R.id.tv_score);
+        wordsCompleted = (TextView) findViewById(R.id.tv_words_completed);
+        duration = (TextView) findViewById(R.id.tv_duration);
         animationFrame = (FrameLayout) findViewById(R.id.animationFrame);
         wordList = new ArrayList<>();
+        textColorDefaultCountdown = duration.getTextColors();
 
         new InitialWord().execute();
     }
@@ -103,12 +125,14 @@ public class WordChainActivity extends AppCompatActivity {
     private void showLoadingAnimation() {
         animationFrame.setVisibility(View.VISIBLE);
         loadingLayout.setVisibility(View.VISIBLE);
+        scoreLayout.setVisibility(View.GONE);
         mainLayout.setVisibility(View.GONE);
     }
 
     private void closeLoadingAnimation(){
         animationFrame.setVisibility(View.GONE);
         loadingLayout.setVisibility(View.GONE);
+        scoreLayout.setVisibility(View.VISIBLE);
         mainLayout.setVisibility(View.VISIBLE);
     }
 
@@ -130,9 +154,11 @@ public class WordChainActivity extends AppCompatActivity {
             return null;
         }
 
+        @SuppressLint("DefaultLocale")
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            score.setText(String.format("Score : %d", gameScore));
             closeLoadingAnimation();
             selectTheDefaultStaringWord();
         }
@@ -148,7 +174,6 @@ public class WordChainActivity extends AppCompatActivity {
         } catch (IOException e) {
             Log.e("Load Asset File",e.toString());
         }
-        Log.d("TAG", "wordlist size : "+wordList.size());
     }
 
     public void suggestNewWordFromApp(ArrayList<String> stringArrayList){
@@ -164,19 +189,23 @@ public class WordChainActivity extends AppCompatActivity {
             spanString.setSpan(new StyleSpan(Typeface.BOLD), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             spanString.setSpan(new RelativeSizeSpan(1.5f), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+
         appWord.setText(spanString);
-        Log.d("TAG", "start Word : "+suggestedWord);
         currentWordApp = suggestedWord;
         wordList.remove(suggestedWord);
         String[] appWordArr = new String[suggestedWord.length()];
+
         for (int i = 0; i < suggestedWord.length(); i++) {
             appWordArr[i] = String.valueOf(suggestedWord.charAt(i));
             lastLetterOfCurrentWordApp = String.valueOf(suggestedWord.charAt(i));
         }
+
         for (String key : appWordArr){
             addViewAppWord((LinearLayout) findViewById(R.id.appWordLayout), key);
         }
-        Log.d("TAG", "last letter app : "+lastLetterOfCurrentWordApp);
+
+        timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+        startCountDown();
     }
 
     private void selectTheDefaultStaringWord() {
@@ -192,19 +221,23 @@ public class WordChainActivity extends AppCompatActivity {
             spanString.setSpan(new StyleSpan(Typeface.BOLD), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             spanString.setSpan(new RelativeSizeSpan(1.5f), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+
         appWord.setText(spanString);
-        Log.d("TAG", "start Word : "+startWord);
         currentWordApp = startWord;
         wordList.remove(randomNumber);
         String[] appWordArr = new String[startWord.length()];
+
         for (int i = 0; i < startWord.length(); i++) {
             appWordArr[i] = String.valueOf(startWord.charAt(i));
             lastLetterOfCurrentWordApp = String.valueOf(startWord.charAt(i));
         }
+
         for (String key : appWordArr){
             addViewAppWord((LinearLayout) findViewById(R.id.appWordLayout), key);
         }
-        Log.d("TAG", "last letter app : "+lastLetterOfCurrentWordApp);
+
+        timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+        startCountDown();
     }
 
     private void addViewAppWord(LinearLayout viewAppWord, final String appWordChar) {
@@ -239,6 +272,41 @@ public class WordChainActivity extends AppCompatActivity {
         });
     }
 
+    private void startCountDown() {
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long l) {
+                timeLeftInMillis = l;
+                updateCountDownText();
+            }
+
+            @Override
+            public void onFinish() {
+                 timeLeftInMillis = 0;
+                 updateCountDownText();
+                 timeUp();
+            }
+        }.start();
+    }
+
+    private void updateCountDownText(){
+        int minutes = (int) ((timeLeftInMillis / 1000) / 60);
+        int seconds = (int) ((timeLeftInMillis / 1000) % 60);
+        String timeFormattedText = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+        duration.setText(timeFormattedText);
+
+        if (timeLeftInMillis < 10000){
+            duration.setTextColor(Color.RED);
+        }else {
+            duration.setTextColor(textColorDefaultCountdown);
+        }
+    }
+
+    private void timeUp(){
+        countDownTimer.cancel();
+        Toast.makeText(this, "Time Up Buddy!", Toast.LENGTH_SHORT).show();
+    }
+
     private void addViewUserWord(LinearLayout viewUserWord, final String userWordChar) {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -258,11 +326,6 @@ public class WordChainActivity extends AppCompatActivity {
 
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/fredoka_one.ttf");
         textView.setTypeface(typeface);
-//        YoYo.with(Techniques.SlideInUp)
-//                .duration(1000)
-//                .repeat(2)
-//                .playOn(textView);
-
         viewUserWord.addView(textView);
     }
 
@@ -298,14 +361,15 @@ public class WordChainActivity extends AppCompatActivity {
                 .repeat(2)
                 .playOn(findViewById(R.id.rl_bottom));
         }
-        Log.d("TAG", "Last letter user : "+lastLetterOfCurrentWordUser);
-        Log.d("TAG", "Current word user : "+currentWordUser);
     }
 
     public class CorrectWord extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            if (countDownTimer != null){
+                countDownTimer.cancel();
+            }
             showCorrectAnimation();
         }
 
@@ -319,9 +383,14 @@ public class WordChainActivity extends AppCompatActivity {
             return null;
         }
 
+        @SuppressLint("DefaultLocale")
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            wordsCounter++;
+            wordsCompleted.setText(String.format("Words Completed : %d", wordsCounter));
+            gameScore = gameScore + MARKS_PER_CORRECT_WORD;
+            score.setText(String.format("Score : %d", gameScore));
             stopCorrectAnimation();
             generateNewAppWord();
         }
@@ -343,7 +412,6 @@ public class WordChainActivity extends AppCompatActivity {
         appWordLayout.removeAllViews();
         ArrayList<String> generated = getPossibleStrings(wordList, lastLetterOfCurrentWordUser);
         if (!generated.isEmpty()){
-            Log.d("TAG", "generated list size : "+generated.size());
             suggestNewWordFromApp(generated);
         }else {
             Toast.makeText(this, "list empty", Toast.LENGTH_SHORT).show();
@@ -353,9 +421,7 @@ public class WordChainActivity extends AppCompatActivity {
     private boolean checkUserWord(String userWord, String s) {
         if (s.equals(lastLetterOfCurrentWordApp)){
             if (wordList.contains(userWord)){
-                Log.d("TAG", "index is : "+wordList.indexOf(userWord));
                 wordList.remove(userWord);
-                Log.d("TAG", "word list is : "+getWordListSize());
                 return true;
             } else return false;
         }else return false;
@@ -387,5 +453,13 @@ public class WordChainActivity extends AppCompatActivity {
 
     public static boolean hasChildren(ViewGroup viewGroup) {
         return viewGroup.getChildCount() > 0;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (countDownTimer != null){
+            countDownTimer.cancel();
+        }
     }
 }

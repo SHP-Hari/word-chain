@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -24,6 +28,7 @@ import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -49,7 +54,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import lk.applife.english.wordchain.R;
-import lk.applife.english.wordchain.utill.FCS;
+import lk.applife.english.wordchain.utill.DatabaseHelper;
 
 public class WordChainActivity extends AppCompatActivity {
 
@@ -75,6 +80,8 @@ public class WordChainActivity extends AppCompatActivity {
     private ColorStateList textColorDefaultCountdown;
 
     ArrayList<String> wordList;
+    ArrayList<String> wordsByApp;
+    ArrayList<String> wordsByUser;
     String currentWordApp;
     String currentWordUser;
     String lastLetterOfCurrentWordApp;
@@ -82,7 +89,12 @@ public class WordChainActivity extends AppCompatActivity {
     private int wordsCounter = 0;
     private int gameScore = 0;
     private CountDownTimer countDownTimer;
+    private CountDownTimer mainGamePlayTimer;
     private long timeLeftInMillis;
+    private long timeLeftInMillisGamePlay;
+    DatabaseHelper db;
+    private int attemptId;
+    Activity wordChainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,9 +129,15 @@ public class WordChainActivity extends AppCompatActivity {
         duration = (TextView) findViewById(R.id.tv_duration);
         animationFrame = (FrameLayout) findViewById(R.id.animationFrame);
         wordList = new ArrayList<>();
+        wordsByApp = new ArrayList<>();
+        wordsByUser = new ArrayList<>();
         textColorDefaultCountdown = duration.getTextColors();
+        db = new DatabaseHelper(this);
+        wordChainActivity = (Activity) WordChainActivity.this;
 
+//        db.insertQuizAttemptMarks(20);
         new InitialWord().execute();
+
     }
 
     private void showLoadingAnimation() {
@@ -134,6 +152,14 @@ public class WordChainActivity extends AppCompatActivity {
         loadingLayout.setVisibility(View.GONE);
         scoreLayout.setVisibility(View.VISIBLE);
         mainLayout.setVisibility(View.VISIBLE);
+    }
+
+    public int getAttemptId() {
+        return attemptId;
+    }
+
+    public void setAttemptId(int attemptId) {
+        this.attemptId = attemptId;
     }
 
     public class InitialWord extends AsyncTask<Void, Void, Void> {
@@ -158,9 +184,23 @@ public class WordChainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            getUserAttempt();
             score.setText(String.format("Score : %d", gameScore));
             closeLoadingAnimation();
             selectTheDefaultStaringWord();
+        }
+    }
+
+    private void getUserAttempt() {
+        Cursor atId = db.getLastRowInMarks();
+        if (atId.getCount() == 0){
+            setAttemptId(1);
+        }else {
+            int lastAttempt = 0;
+            while (atId.moveToNext()) {
+                lastAttempt = atId.getInt(atId.getColumnIndex("attempt_id"));
+            }
+            setAttemptId(++lastAttempt);
         }
     }
 
@@ -192,6 +232,7 @@ public class WordChainActivity extends AppCompatActivity {
 
         appWord.setText(spanString);
         currentWordApp = suggestedWord;
+        wordsByApp.add(suggestedWord);
         wordList.remove(suggestedWord);
         String[] appWordArr = new String[suggestedWord.length()];
 
@@ -224,6 +265,7 @@ public class WordChainActivity extends AppCompatActivity {
 
         appWord.setText(spanString);
         currentWordApp = startWord;
+        wordsByApp.add(startWord);
         wordList.remove(randomNumber);
         String[] appWordArr = new String[startWord.length()];
 
@@ -238,6 +280,8 @@ public class WordChainActivity extends AppCompatActivity {
 
         timeLeftInMillis = COUNTDOWN_IN_MILLIS;
         startCountDown();
+        timeLeftInMillisGamePlay = MAXIMUM_GAME_PLAY_TIME;
+        startMainGamePlayCountDown();
     }
 
     private void addViewAppWord(LinearLayout viewAppWord, final String appWordChar) {
@@ -289,6 +333,21 @@ public class WordChainActivity extends AppCompatActivity {
         }.start();
     }
 
+    private void startMainGamePlayCountDown(){
+        mainGamePlayTimer = new CountDownTimer(timeLeftInMillisGamePlay, 1000) {
+            @Override
+            public void onTick(long l) {
+                timeLeftInMillisGamePlay = l;
+            }
+
+            @Override
+            public void onFinish() {
+                timeLeftInMillisGamePlay = 0;
+                endAttempt();
+            }
+        }.start();
+    }
+
     private void updateCountDownText(){
         int minutes = (int) ((timeLeftInMillis / 1000) / 60);
         int seconds = (int) ((timeLeftInMillis / 1000) % 60);
@@ -305,6 +364,58 @@ public class WordChainActivity extends AppCompatActivity {
     private void timeUp(){
         countDownTimer.cancel();
         Toast.makeText(this, "Time Up Buddy!", Toast.LENGTH_SHORT).show();
+        endAttempt();
+    }
+
+    private void endAttempt(){
+        countDownTimer.cancel();
+        mainGamePlayTimer.cancel();
+        openTimeUpDialog();
+    }
+
+    private void openTimeUpDialog() {
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog_one_button, null);
+
+        // Set the custom layout as alert dialog view
+        alertDialog.setView(dialogView);
+
+        // Get the custom alert dialog view widgets reference
+        Button btn_positive = dialogView.findViewById(R.id.dialog_positive_btn);
+        TextView title = dialogView.findViewById(R.id.dialog_titile);
+        TextView dialog_tv = dialogView.findViewById(R.id.dialog_tv);
+
+        title.setText("Game Over!");
+        dialog_tv.setText("Main Game Play Time has been Finished");
+
+        btn_positive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertAttemptDetails(getAttemptId(), gameScore, wordsByApp, wordsByUser);
+                alertDialog.cancel();
+            }
+        });
+
+        new Dialog(getApplicationContext());
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        if (!wordChainActivity.isFinishing()) {
+            alertDialog.show();
+        }
+    }
+
+    private void insertAttemptDetails(int attemptId, int gameScore, ArrayList<String> wordsByApp, ArrayList<String> wordsByUser) {
+        db.insertQuizAttemptMarks(gameScore);
+        for (int i = 0; i < wordsByUser.size(); i++){
+            db.insertQuizAttemptWords(attemptId, wordsByApp.get(i), wordsByUser.get(i));
+        }
+        Intent win = new Intent(WordChainActivity.this, WinningActivity.class);
+        win.putExtra("attempt", getAttemptId());
+        win.putExtra("score", gameScore);
+        win.putExtra("finished", "yes");
+        startActivity(win);
+        this.finish();
     }
 
     private void addViewUserWord(LinearLayout viewUserWord, final String userWordChar) {
@@ -348,6 +459,7 @@ public class WordChainActivity extends AppCompatActivity {
                 userInputEditText.setText("");
                 lastLetterOfCurrentWordUser = userWordArr[userWord.length() -1];
                 currentWordUser = userWord;
+                wordsByUser.add(userWord);
                 new CorrectWord().execute();
             }else {
                 YoYo.with(Techniques.Shake)
@@ -414,7 +526,8 @@ public class WordChainActivity extends AppCompatActivity {
         if (!generated.isEmpty()){
             suggestNewWordFromApp(generated);
         }else {
-            Toast.makeText(this, "list empty", Toast.LENGTH_SHORT).show();
+            gameScore = gameScore * 2;
+            endAttempt();
         }
     }
 
@@ -460,6 +573,9 @@ public class WordChainActivity extends AppCompatActivity {
         super.onDestroy();
         if (countDownTimer != null){
             countDownTimer.cancel();
+        }
+        if (mainGamePlayTimer != null){
+            mainGamePlayTimer.cancel();
         }
     }
 }

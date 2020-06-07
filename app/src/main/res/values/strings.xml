@@ -21,4 +21,11 @@
     <string name="lang">Please Select</string>
     <string name="playText">WORD CHAIN</string>
     <string name="submitText">Submit</string>
+    <string name="cancelcl">cancel</string>
+    <string name="emptyUsernaName">Please enter your name</string>
+    <string name="invalidUserName">Username should contain only letters</string>
+    <string name="congratulations">Congratulations!!</string>
+    <string name="you_won">You Won</string>
+    <string name="ok">OK</string>
+    <string name="show_words">Show Words</string>
 </resources>

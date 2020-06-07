@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/dialogCardRadius"
+    android:elevation="5dp"
+    android:layout_gravity="center"
+    android:layout_marginTop="@dimen/dialogMargin"
+    android:layout_marginBottom="@dimen/dialogMargin"
+    android:background="@color/whiteCardColor">
+
+    <LinearLayout
+        style="@style/linearParent"
+        android:layout_gravity="center"
+        android:padding="@dimen/dialogMargin">
+
+        <TextView
+            style="@style/headerTextPrimary"
+            android:text="Enter Your Name"
+            android:layout_marginTop="@dimen/dialogMargin"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/parent"
+            android:id="@+id/usernameLayout"
+            app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
+            app:errorTextAppearance="@style/TextAppearence.App.TextInputLayoutError"
+            app:passwordToggleEnabled="false"
+            android:layout_marginTop="@dimen/space10">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name"
+                style="@style/modifiedEditText"
+                android:inputType="text|textPersonName"
+                android:maxLines="1"
+                android:hint="Name"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/dialog_neutral_btn"
+                style="@style/viewParent"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/cancelcl"
+                android:background="@drawable/button_language_shape"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_marginTop="@dimen/dialogMargin"/>
+            <Button
+                android:id="@+id/dialog_positive_btn"
+                style="@style/viewParent"
+                android:layout_marginStart="10dp"
+                android:text="OK"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:background="@drawable/login_button_bk"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_marginTop="@dimen/dialogMargin"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

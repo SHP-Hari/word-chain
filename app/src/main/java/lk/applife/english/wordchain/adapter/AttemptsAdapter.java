@@ -74,6 +74,11 @@ public class AttemptsAdapter extends RecyclerView.Adapter<AttemptsAdapter.Attemp
             openWordsBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    openWordsBtn.setVisibility(View.VISIBLE);
+                    if (checkedPosition != getAdapterPosition()) {
+                        notifyItemChanged(checkedPosition);
+                        checkedPosition = getAdapterPosition();
+                    }
                     Intent words = new Intent(context, WordsActivity.class);
                     words.putExtra("attempt_id", getSelected().getId());
                     context.startActivity(words);

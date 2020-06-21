@@ -23,10 +23,12 @@ import lk.applife.english.wordchain.R;
 import lk.applife.english.wordchain.adapter.AttemptsAdapter;
 import lk.applife.english.wordchain.model.UserAttempt;
 import lk.applife.english.wordchain.utill.DatabaseHelper;
+import lk.applife.english.wordchain.utill.MyContextWrapper;
 import lk.applife.english.wordchain.utill.UserNameDialog;
 
 public class ProfileActivity extends AppCompatActivity implements UserNameDialog.UserNameDialogListener {
     public static final String USER_INFO_PREFERENCES = "userInformation";
+    String LANG_CURRENT = "";
     SharedPreferences userInfoPreference;
     TextView nameTextView;
     LinearLayout noScores;
@@ -138,5 +140,12 @@ public class ProfileActivity extends AppCompatActivity implements UserNameDialog
         SharedPreferences.Editor editor = userInfoPreference.edit();
         editor.putString("username", name);
         editor.apply();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences preferences = newBase.getSharedPreferences("userinfo", MODE_PRIVATE);
+        LANG_CURRENT = preferences.getString("Language", "en");
+        super.attachBaseContext(MyContextWrapper.wrap(newBase, LANG_CURRENT));
     }
 }

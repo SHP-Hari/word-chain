@@ -15,6 +15,7 @@ import android.widget.TextView;
 import lk.applife.english.wordchain.R;
 import lk.applife.english.wordchain.fragments.LanguageChange;
 import lk.applife.english.wordchain.utill.DatabaseHelper;
+import lk.applife.english.wordchain.utill.MyContextWrapper;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     SharedPreferences userInfoPreference;
     String userName;
     DatabaseHelper db;
+    String LANG_CURRENT = "";
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -38,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
 
         if (userName != null){
-            userWelcome.setText("Hello " + userName);
+            userWelcome.setText(getString(R.string.hello) + userName);
         }
         openBottomSheet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +77,14 @@ public class HomeActivity extends AppCompatActivity {
         super.onResume();
         userName = userInfoPreference.getString("username", null);
         if (userName != null){
-            userWelcome.setText("Hello " + userName);
+            userWelcome.setText(getString(R.string.hello) + userName);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences preferences = newBase.getSharedPreferences("userinfo", MODE_PRIVATE);
+        LANG_CURRENT = preferences.getString("Language", "en");
+        super.attachBaseContext(MyContextWrapper.wrap(newBase, LANG_CURRENT));
     }
 }

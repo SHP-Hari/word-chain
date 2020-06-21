@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -16,6 +18,7 @@ import lk.applife.english.wordchain.adapter.WordsAdapter;
 import lk.applife.english.wordchain.model.UserAttempt;
 import lk.applife.english.wordchain.model.Word;
 import lk.applife.english.wordchain.utill.DatabaseHelper;
+import lk.applife.english.wordchain.utill.MyContextWrapper;
 
 public class WordsActivity extends AppCompatActivity {
 
@@ -26,6 +29,7 @@ public class WordsActivity extends AppCompatActivity {
     WordsAdapter wordsAdapter;
     int attemptId;
     DatabaseHelper db;
+    String LANG_CURRENT = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,5 +72,12 @@ public class WordsActivity extends AppCompatActivity {
             wordsRecyclerView.setAdapter(wordsAdapter);
             wordsAdapter.setWords(wordArrayList);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences preferences = newBase.getSharedPreferences("userinfo", MODE_PRIVATE);
+        LANG_CURRENT = preferences.getString("Language", "en");
+        super.attachBaseContext(MyContextWrapper.wrap(newBase, LANG_CURRENT));
     }
 }

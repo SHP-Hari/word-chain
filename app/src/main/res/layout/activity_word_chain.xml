@@ -118,7 +118,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/space10">
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -147,61 +148,10 @@
                     android:id="@+id/appWordLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:orientation="horizontal">
 
                 </LinearLayout>
             </HorizontalScrollView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="20dp">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/stepCard1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:orientation="vertical"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="8dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layoutDirection="ltr"
-                        android:orientation="horizontal"
-                        android:padding="8dp"
-                        tools:ignore="UnusedAttribute">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/tvSuggestedWord"
-                                    style="@style/suggestedWordStyle"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_weight="10"
-                                    android:gravity="center"
-                                    android:text="@string/playStep1" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

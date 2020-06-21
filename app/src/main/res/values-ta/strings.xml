@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Word Chain</string>
+    //Home Activity
+    <string name="userWelcomeText">வணக்கம்!</string>
+    <string name="userWelcomeSloganText">ஆங்கில சொற்களஞ்சியத்தை பயிற்சி செய்வோம்</string>
+    <string name="playGame">விளையாடு</string>
+    <string name="playGameDescription">விளையாட்டு விவரம்</string>
+    <string name="howToPlayText">எப்படி விளையாடுவது</string>
+    <string name="howToPlayDescription">எப்படி விளையாடுவது விளக்கம்</string>
+    <string name="activateProText">புரோவை செயல்படுத்து</string>
+    <string name="activateProDescription">விளக்கம் செயல்படுத்து</string>
+    <string name="changelang">மொழியை மாற்றுங்கள்</string>
+    <string name="hello">வணக்கம்\u0020</string>
+
+    //How To Play Activity
+    <string name="playStep1">படி 01</string>
+    <string name="playStepInfo1">தகவல் 1</string>
+    <string name="playStep2">படி 02</string>
+    <string name="playStep3">படி 03</string>
+    <string name="playStep4">படி 04</string>
+    <string name="playStepInfo2">தகவல் 2</string>
+    <string name="playStepInfo3">தகவல் 3</string>
+    <string name="playStepInfo4">தகவல் 4</string>
+
+    //Change Language Bottom Sheet
+    <string name="languageLabel">விருப்பமான மொழியைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="lang">தேர்வு செய்யவும்</string>
+
+    //Username Dialog
+    <string name="playText">WORD CHAIN</string>
+    <string name="submitText">சமர்ப்பி</string>
+    <string name="cancelcl">ரத்துசெய்</string>
+    <string name="emptyUsernaName">உங்களுடைய பெயரை பதிவு செய்யவும்</string>
+    <string name="invalidUserName">பயனர்பெயரில் எழுத்துக்கள் மட்டுமே இருக்க வேண்டும்</string>
+    <string name="ok">சரி</string>
+    <string name="enter_your_name">உங்கள் பெயரை உள்ளிடவும்</string>
+    <string name="name">பெயர்</string>
+
+    //splash screen
+    <string name="splash_description">ஆங்கில சொற்களஞ்சியத்தை பயிற்சி செய்வோம்</string>
+
+    //Profile Activity
+    <string name="play_profile">விளையாட்டு</string>
+    <string name="score_profile">மதிப்பெண்</string>
+    <string name="words_profile">சொற்கள்</string>
+    <string name="noScoresYet">உங்களிடம் இதுவரை எந்த மதிப்பெண்களும் இல்லை</string>
+    <string name="start_game">தொடக்கம் விளையாட்டு</string>
+
+    //Winning Activity
+    <string name="congratulations">வாழ்த்துக்கள்!!</string>
+    <string name="you_won">நீங்கள் வென்றீர்கள்</string>
+    <string name="show_words">சொற்களைக் காட்டு</string>
+    <string name="your_score">உங்கள் மதிப்பெண் :\u0020</string>
+
+    //Word Chain Activity
+    <string name="game_over">விளையாட்டு முடிந்தது!</string>
+    <string name="main_time_finished">முதன்மை விளையாட்டு நேரம் முடிந்தது</string>
+
+    //Words Activity
+    <string name="set_of_words">சொற்களின் தொகுப்பு</string>
+    <string name="words_used_by_game_play_attempt">விளையாட்டு முயற்சியினால் பயன்படுத்தப்பட்ட வார்த்தைகள் :\u0020</string>
+</resources>

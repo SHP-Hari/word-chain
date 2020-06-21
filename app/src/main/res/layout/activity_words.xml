@@ -43,7 +43,7 @@
                         android:layout_height="0dp"
                         android:layout_marginStart="8dp"
                         android:layout_weight="10"
-                        android:text="Set of Words" />
+                        android:text="@string/set_of_words" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -58,7 +58,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginStart="8dp"
-                        android:text="Words used by Game play attempt : " />
+                        android:text="@string/words_used_by_game_play_attempt" />
                     <TextView
                         android:id="@+id/tv_attempt_no"
                         style="@style/homeActivityUserGreetingSlogan"

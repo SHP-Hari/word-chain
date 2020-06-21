@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Word Chain</string>
+    //Home Activity
     <string name="userWelcomeText">Hello There!</string>
     <string name="userWelcomeSloganText">Let\'s Practise English Vocabulary</string>
     <string name="playGame">Play Game</string>
@@ -9,6 +10,9 @@
     <string name="activateProText">Activate Pro</string>
     <string name="activateProDescription">Description Activate pro</string>
     <string name="changelang">Change Language</string>
+    <string name="hello">Hello \u0020</string>
+
+    //How To Play Activity
     <string name="playStep1">Step 01</string>
     <string name="playStepInfo1">Information about step 1</string>
     <string name="playStep2">Step 02</string>
@@ -17,15 +21,42 @@
     <string name="playStepInfo2">info 2</string>
     <string name="playStepInfo3">info 3</string>
     <string name="playStepInfo4">info 4</string>
+
+    //Change Language Bottom Sheet
     <string name="languageLabel">Select Preferred Language</string>
     <string name="lang">Please Select</string>
+
+    //Username Dialog
     <string name="playText">WORD CHAIN</string>
     <string name="submitText">Submit</string>
-    <string name="cancelcl">cancel</string>
+    <string name="cancelcl">Cancel</string>
     <string name="emptyUsernaName">Please enter your name</string>
     <string name="invalidUserName">Username should contain only letters</string>
+    <string name="ok">OK</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="name">Name</string>
+
+    //splash screen
+    <string name="splash_description">Let\'s Practise English Vocabulary</string>
+
+    //Profile Activity
+    <string name="play_profile">Play</string>
+    <string name="score_profile">Score</string>
+    <string name="words_profile">Words</string>
+    <string name="noScoresYet">You do not have any scores yet.</string>
+    <string name="start_game">Start Game</string>
+
+    //Winning Activity
     <string name="congratulations">Congratulations!!</string>
     <string name="you_won">You Won</string>
-    <string name="ok">OK</string>
     <string name="show_words">Show Words</string>
+    <string name="your_score">Your Score :\u0020</string>
+
+    //Word Chain Activity
+    <string name="game_over">Game Over!</string>
+    <string name="main_time_finished">Main Game Play Time has been Finished</string>
+
+    //Words Activity
+    <string name="set_of_words">Set of Words</string>
+    <string name="words_used_by_game_play_attempt">Words used by Game play attempt :\u0020</string>
 </resources>

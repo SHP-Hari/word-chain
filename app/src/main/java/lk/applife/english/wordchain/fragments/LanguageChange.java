@@ -28,9 +28,11 @@ import lk.applife.english.wordchain.ui.HomeActivity;
 
 public class LanguageChange extends BottomSheetDialogFragment implements AdapterView.OnItemSelectedListener {
     Spinner spinner;
-    boolean language = false;
-    int check = 0;
     String LANG_CURRENT = "";
+    private String languageCodeEnglish = "en";
+    private String languageCodeSinhala = "si";
+    private String languageCodeTamil = "ta";
+    String selectedLang = null;
 
     @Nullable
     @Override
@@ -42,70 +44,71 @@ public class LanguageChange extends BottomSheetDialogFragment implements Adapter
 
         spinner.setOnItemSelectedListener(this);
         List<String> categories = new ArrayList<>();
-        //     categories.add(getString(R.string.selecthere));
-        switch (LANG_CURRENT) {
-            case "en":
-                categories.add("English");
-                categories.add("සිංහල");
-                categories.add("சிங்களம்");
-                break;
-            case "sin":
-                categories.add("සිංහල");
-                categories.add("English");
-                categories.add("சிங்களம்");
-                break;
-            default:
-                categories.add("சிங்களம்");
-                categories.add("English");
-                categories.add("සිංහල");
-
-                break;
-        }
+        categories.add("English");
+        categories.add("සිංහල");
+        categories.add("தமிழ்");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(Objects.requireNonNull(getActivity()), android.R.layout.simple_spinner_item, categories);
-
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
+        setDefaultSelectedItem(LANG_CURRENT);
+        view.findViewById(R.id.changeLanguageBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (selectedLang != null){
+                    swichLanguage(selectedLang);
+                }
+            }
+        });
+
         return view;
+    }
+
+    private void setDefaultSelectedItem(String lang_current) {
+        switch (lang_current){
+            case "en" : {
+                spinner.setSelection(0);
+                break;
+            }
+            case "si" : {
+                spinner.setSelection(1);
+                break;
+            }
+            case "ta" : {
+                spinner.setSelection(2);
+                break;
+            }
+            default:
+                throw new IllegalStateException("Unexpected value: " + lang_current);
+        }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+        selectedLang = spinner.getSelectedItem().toString();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        if (++check > 1) {
-            // On selecting a spinner item
-//            String item = parent.getItemAtPosition(position).toString();
-            String item = "en";
+        selectedLang = spinner.getSelectedItem().toString();
+        Toast.makeText(getActivity(), "onNothingSelected", Toast.LENGTH_SHORT).show();
+    }
 
-            // Showing selected spinner item
-            language = true;
-
-            switch (item) {
-                case "English": {
-                    changeLang(getActivity(), "en");
-                    break;
-                }
-
-                case "සිංහල": {
-                    changeLang(getActivity(), "sin");
-                    break;
-                }
-
-                case "சிங்களம்": {
-                    changeLang(getActivity(), "ar");
-                    break;
-                }
+    private void swichLanguage(String selectedLang) {
+        switch (selectedLang){
+            case "English" : {
+                changeLang(getActivity(), languageCodeEnglish);
+                break;
             }
-
-            startActivity(new Intent(getActivity(), HomeActivity.class));
-
-        } else {
+            case "සිංහල" : {
+                changeLang(getActivity(), languageCodeSinhala);
+                break;
+            }
+            case "தமிழ்" : {
+                changeLang(getActivity(), languageCodeTamil);
+                break;
+            }
         }
     }
 
@@ -114,6 +117,8 @@ public class LanguageChange extends BottomSheetDialogFragment implements Adapter
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("Language", lang);
         editor.apply();
+        startActivity(new Intent(getActivity(), HomeActivity.class));
+        getActivity().finish();
     }
 
 }

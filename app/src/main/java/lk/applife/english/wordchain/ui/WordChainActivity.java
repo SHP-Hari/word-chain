@@ -8,7 +8,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -16,13 +18,10 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.os.PersistableBundle;
 import android.text.InputType;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
@@ -43,11 +42,9 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -55,6 +52,7 @@ import java.util.regex.Pattern;
 
 import lk.applife.english.wordchain.R;
 import lk.applife.english.wordchain.utill.DatabaseHelper;
+import lk.applife.english.wordchain.utill.MyContextWrapper;
 
 public class WordChainActivity extends AppCompatActivity {
 
@@ -71,11 +69,11 @@ public class WordChainActivity extends AppCompatActivity {
     LinearLayout mainLayout;
     LinearLayout correctAnimationLayout;
     LinearLayout scoreLayout;
-    TextView appWord;
     FrameLayout animationFrame;
     TextView score;
     TextView wordsCompleted;
     TextView duration;
+    String LANG_CURRENT = "";
 
     private ColorStateList textColorDefaultCountdown;
 
@@ -123,7 +121,6 @@ public class WordChainActivity extends AppCompatActivity {
         mainLayout = (LinearLayout) findViewById(R.id.mainWordsLayout);
         scoreLayout = (LinearLayout) findViewById(R.id.scoreLayout);
         correctAnimationLayout = (LinearLayout) findViewById(R.id.correctAnimationLayout);
-        appWord = (TextView) findViewById(R.id.tvSuggestedWord);
         score = (TextView) findViewById(R.id.tv_score);
         wordsCompleted = (TextView) findViewById(R.id.tv_words_completed);
         duration = (TextView) findViewById(R.id.tv_duration);
@@ -229,8 +226,6 @@ public class WordChainActivity extends AppCompatActivity {
             spanString.setSpan(new StyleSpan(Typeface.BOLD), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             spanString.setSpan(new RelativeSizeSpan(1.5f), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
-
-        appWord.setText(spanString);
         currentWordApp = suggestedWord;
         wordsByApp.add(suggestedWord);
         wordList.remove(suggestedWord);
@@ -241,6 +236,7 @@ public class WordChainActivity extends AppCompatActivity {
             lastLetterOfCurrentWordApp = String.valueOf(suggestedWord.charAt(i));
         }
 
+        setAppWordLayoutGravity();
         for (String key : appWordArr){
             addViewAppWord((LinearLayout) findViewById(R.id.appWordLayout), key);
         }
@@ -263,7 +259,6 @@ public class WordChainActivity extends AppCompatActivity {
             spanString.setSpan(new RelativeSizeSpan(1.5f), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
-        appWord.setText(spanString);
         currentWordApp = startWord;
         wordsByApp.add(startWord);
         wordList.remove(randomNumber);
@@ -274,6 +269,7 @@ public class WordChainActivity extends AppCompatActivity {
             lastLetterOfCurrentWordApp = String.valueOf(startWord.charAt(i));
         }
 
+        setAppWordLayoutGravity();
         for (String key : appWordArr){
             addViewAppWord((LinearLayout) findViewById(R.id.appWordLayout), key);
         }
@@ -284,22 +280,39 @@ public class WordChainActivity extends AppCompatActivity {
         startMainGamePlayCountDown();
     }
 
+    private void setAppWordLayoutGravity() {
+        if (currentWordApp != null){
+            if (currentWordApp.length() < 12){
+                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT);
+                lp.gravity= Gravity.CENTER;
+                appWordLayout.setLayoutParams(lp);
+            }else {
+                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT);
+                lp.gravity= Gravity.START;
+                appWordLayout.setLayoutParams(lp);
+            }
+        }
+    }
+
     private void addViewAppWord(LinearLayout viewAppWord, final String appWordChar) {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
+                50,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        layoutParams.rightMargin = 2;
-        layoutParams.leftMargin = 2;
+        layoutParams.rightMargin = 1;
+        layoutParams.leftMargin = 1;
 
         final TextView textView = new TextView(this);
         textView.setLayoutParams(layoutParams);
-        textView.setBackground(this.getResources().getDrawable(R.drawable.ic_plus_icon));
-        textView.setTextColor(this.getResources().getColor(R.color.word_chain_user_input));
+        textView.setBackground(this.getResources().getDrawable(R.drawable.alpha_app_bg));
+//        textView.setTextColor(this.getResources().getColor(R.color.word_chain_user_input));
         textView.setGravity(Gravity.CENTER);
         textView.setText(appWordChar);
-        textView.setTextSize(32);
+        textView.setTextSize(30);
         textView.setAllCaps(true);
+        textView.setPadding(4, 2, 4, 2);
 
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/fredoka_one.ttf");
         textView.setTypeface(typeface);
@@ -386,8 +399,8 @@ public class WordChainActivity extends AppCompatActivity {
         TextView title = dialogView.findViewById(R.id.dialog_titile);
         TextView dialog_tv = dialogView.findViewById(R.id.dialog_tv);
 
-        title.setText("Game Over!");
-        dialog_tv.setText("Main Game Play Time has been Finished");
+        title.setText(R.string.game_over);
+        dialog_tv.setText(R.string.main_time_finished);
 
         btn_positive.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -420,20 +433,21 @@ public class WordChainActivity extends AppCompatActivity {
 
     private void addViewUserWord(LinearLayout viewUserWord, final String userWordChar) {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
+                50,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        layoutParams.rightMargin = 2;
-        layoutParams.leftMargin = 2;
+        layoutParams.rightMargin = 1;
+        layoutParams.leftMargin = 1;
 
         final TextView textView = new TextView(this);
         textView.setLayoutParams(layoutParams);
-        textView.setBackground(this.getResources().getDrawable(R.drawable.ic_plus_icon));
-        textView.setTextColor(this.getResources().getColor(R.color.primaryTextColor));
+        textView.setBackground(this.getResources().getDrawable(R.drawable.alpha_user_bg));
+        textView.setTextColor(this.getResources().getColor(R.color.black));
         textView.setGravity(Gravity.CENTER);
         textView.setText(userWordChar);
-        textView.setTextSize(32);
+        textView.setTextSize(30);
         textView.setAllCaps(true);
+        textView.setPadding(4, 2, 4, 2);
 
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/fredoka_one.ttf");
         textView.setTypeface(typeface);
@@ -450,16 +464,17 @@ public class WordChainActivity extends AppCompatActivity {
 
             boolean pass = checkUserWord(userWord, userWordArr[0]);
             if (pass){
-                if (WordChainActivity.hasChildren(userWordLayout)){
-                    userWordLayout.removeAllViews();
-                }
-                for (String key : userWordArr){
-                    addViewUserWord((LinearLayout) findViewById(R.id.userWordLayout), key);
-                }
                 userInputEditText.setText("");
                 lastLetterOfCurrentWordUser = userWordArr[userWord.length() -1];
                 currentWordUser = userWord;
                 wordsByUser.add(userWord);
+                if (WordChainActivity.hasChildren(userWordLayout)){
+                    userWordLayout.removeAllViews();
+                }
+                setUserWordLayoutGravity();
+                for (String key : userWordArr){
+                    addViewUserWord((LinearLayout) findViewById(R.id.userWordLayout), key);
+                }
                 new CorrectWord().execute();
             }else {
                 YoYo.with(Techniques.Shake)
@@ -472,6 +487,22 @@ public class WordChainActivity extends AppCompatActivity {
                 .duration(1000)
                 .repeat(2)
                 .playOn(findViewById(R.id.rl_bottom));
+        }
+    }
+
+    private void setUserWordLayoutGravity() {
+        if (currentWordUser != null){
+            if (currentWordUser.length() < 12){
+                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT);
+                lp.gravity= Gravity.CENTER;
+                userWordLayout.setLayoutParams(lp);
+            }else {
+                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT);
+                lp.gravity= Gravity.START;
+                userWordLayout.setLayoutParams(lp);
+            }
         }
     }
 
@@ -577,5 +608,12 @@ public class WordChainActivity extends AppCompatActivity {
         if (mainGamePlayTimer != null){
             mainGamePlayTimer.cancel();
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences preferences = newBase.getSharedPreferences("userinfo", MODE_PRIVATE);
+        LANG_CURRENT = preferences.getString("Language", "en");
+        super.attachBaseContext(MyContextWrapper.wrap(newBase, LANG_CURRENT));
     }
 }

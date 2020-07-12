@@ -26,6 +26,7 @@
     //Change Language Bottom Sheet
     <string name="languageLabel">விருப்பமான மொழியைத் தேர்ந்தெடுக்கவும்</string>
     <string name="lang">தேர்வு செய்யவும்</string>
+    <string name="language_changed_success_message">மொழி வெற்றிகரமாக மாற்றப்பட்டது</string>
 
     //Username Dialog
     <string name="playText">WORD CHAIN</string>

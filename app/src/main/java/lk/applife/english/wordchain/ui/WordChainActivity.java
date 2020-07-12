@@ -616,4 +616,77 @@ public class WordChainActivity extends AppCompatActivity {
         LANG_CURRENT = preferences.getString("Language", "en");
         super.attachBaseContext(MyContextWrapper.wrap(newBase, LANG_CURRENT));
     }
+
+    @Override
+    public void onBackPressed() {
+        pauseAndLeaveGame();
+    }
+
+    private void pauseAndLeaveGame() {
+        countDownTimer.cancel();
+        mainGamePlayTimer.cancel();
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog_card, null);
+        // Set the custom layout as alert dialog view
+        alertDialog.setView(dialogView);
+        // Get the custom alert dialog view widgets reference
+        Button btn_positive = dialogView.findViewById(R.id.dialog_positive_btn);
+        Button btn_negative = dialogView.findViewById(R.id.dialog_neutral_btn);
+        TextView title = dialogView.findViewById(R.id.dialog_titile);
+        TextView dialog_tv = dialogView.findViewById(R.id.dialog_tv);
+
+        title.setText(R.string.pausedialog);
+        dialog_tv.setText(R.string.pauseornot);
+
+        btn_positive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                storePausePaper();
+                alertviewing = false;
+                alertDialog.cancel();
+//                finish();
+            }
+        });
+
+        btn_negative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertviewing = false;
+                alertDialog.cancel();
+                startCountDown();
+                startMainGamePlayCountDown();
+
+            }
+        });
+
+        new Dialog(getApplicationContext());
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        if (!wordChainActivity.isFinishing()) {
+            alertDialog.show();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        if (countDownTimer != null){
+            countDownTimer.cancel();
+        }
+        if (mainGamePlayTimer != null){
+            mainGamePlayTimer.cancel();
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        if (countDownTimer != null){
+            startCountDown();
+        }
+        if (mainGamePlayTimer != null){
+            startMainGamePlayCountDown();
+        }
+        super.onResume();
+    }
 }

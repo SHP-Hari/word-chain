@@ -26,6 +26,7 @@
     //Change Language Bottom Sheet
     <string name="languageLabel">කැමති භාෂාව තෝරන්න</string>
     <string name="lang">කරුණාකර තෝරන්න</string>
+    <string name="language_changed_success_message">භාෂාව සාර්ථකව වෙනස් විය</string>
 
     //Username Dialog
     <string name="playText">WORD CHAIN</string>

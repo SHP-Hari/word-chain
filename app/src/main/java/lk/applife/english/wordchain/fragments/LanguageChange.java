@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +31,7 @@ import lk.applife.english.wordchain.ui.HomeActivity;
 public class LanguageChange extends BottomSheetDialogFragment implements AdapterView.OnItemSelectedListener {
     Spinner spinner;
     String LANG_CURRENT = "";
+    LinearLayout language;
     private String languageCodeEnglish = "en";
     private String languageCodeSinhala = "si";
     private String languageCodeTamil = "ta";
@@ -39,6 +42,7 @@ public class LanguageChange extends BottomSheetDialogFragment implements Adapter
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bottom_sheet_language, container, false);
         spinner = view.findViewById(R.id.spinner);
+        language = (LinearLayout) view.findViewById(R.id.language);
         SharedPreferences mSettings = Objects.requireNonNull(getActivity()).getSharedPreferences("userinfo", Context.MODE_PRIVATE);
         LANG_CURRENT = mSettings.getString("Language", "en");
 
@@ -117,6 +121,7 @@ public class LanguageChange extends BottomSheetDialogFragment implements Adapter
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("Language", lang);
         editor.apply();
+        Snackbar.make(language, R.string.language_changed_success_message, Snackbar.LENGTH_LONG);
         startActivity(new Intent(getActivity(), HomeActivity.class));
         getActivity().finish();
     }

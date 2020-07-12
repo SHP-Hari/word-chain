@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Word Chain</string>
+    //Home Activity
+    <string name="userWelcomeText">ආයුබෝවන්!</string>
+    <string name="userWelcomeSloganText">ඉංග්‍රීසි වචන මාලාව පුහුණු කරමු</string>
+    <string name="playGame">සෙල්ලම් කරන්න</string>
+    <string name="playGameDescription">ක්‍රීඩා විස්තරය</string>
+    <string name="howToPlayText">ක්රීඩා කරන්නේ කෙසේද</string>
+    <string name="howToPlayDescription">විස්තරය සෙල්ලම් කරන්නේ කෙසේද</string>
+    <string name="activateProText">Pro සක්‍රිය කරන්න</string>
+    <string name="activateProDescription">විස්තරය සක්‍රිය කරන්න</string>
+    <string name="changelang">භාෂාව වෙනස් කරන්න</string>
+    <string name="hello">ආයුබෝවන්\u0020</string>
+
+    //How To Play Activity
+    <string name="playStep1">පියවර 01</string>
+    <string name="playStepInfo1">තොරතුරු 1</string>
+    <string name="playStep2">පියවර 02</string>
+    <string name="playStep3">පියවර 03</string>
+    <string name="playStep4">පියවර 04</string>
+    <string name="playStepInfo2">තොරතුරු 2</string>
+    <string name="playStepInfo3">තොරතුරු 3</string>
+    <string name="playStepInfo4">තොරතුරු 4</string>
+
+    //Change Language Bottom Sheet
+    <string name="languageLabel">කැමති භාෂාව තෝරන්න</string>
+    <string name="lang">කරුණාකර තෝරන්න</string>
+    <string name="language_changed_success_message">භාෂාව සාර්ථකව වෙනස් විය</string>
+
+    //Username Dialog
+    <string name="playText">WORD CHAIN</string>
+    <string name="submitText">ඉදිරිපත් කරන්න</string>
+    <string name="cancelcl">අවලංගු කරන්න</string>
+    <string name="emptyUsernaName">ඔබේ නම ඇතුලත් කරන්න</string>
+    <string name="invalidUserName">පරිශීලක නාමයේ අකුරු පමණක් අඩංගු විය යුතුය</string>
+    <string name="ok">හරි</string>
+    <string name="enter_your_name">ඔබේ නම ඇතුළත් කරන්න</string>
+    <string name="name">නම</string>
+
+    //splash screen
+    <string name="splash_description">ඉංග්‍රීසි වචන මාලාව පුහුණු කරමු</string>
+
+    //Profile Activity
+    <string name="play_profile">සෙල්ලම්</string>
+    <string name="score_profile">ලකුණු</string>
+    <string name="words_profile">වචන</string>
+    <string name="noScoresYet">ඔබට තවම ලකුණු නොමැත</string>
+    <string name="start_game">තරගය අරඔන්න</string>
+
+    //Winning Activity
+    <string name="congratulations">සුභ පැතුම්!!</string>
+    <string name="you_won">ඔබ දිනුම්</string>
+    <string name="show_words">වචන පෙන්වන්න</string>
+    <string name="your_score">ඔබේ ලකුණු :\u0020</string>
+
+    //Word Chain Activity
+    <string name="game_over">ක්රිඩාව අවසන් වෙනවා!</string>
+    <string name="main_time_finished">ප්‍රධාන ක්‍රීඩා කාලය අවසන්</string>
+
+    //Words Activity
+    <string name="set_of_words">වචන කට්ටලය</string>
+    <string name="words_used_by_game_play_attempt">ගේම් ප්ලේ උත්සාහයෙන් භාවිතා වන වචන :\u0020</string>
+</resources>

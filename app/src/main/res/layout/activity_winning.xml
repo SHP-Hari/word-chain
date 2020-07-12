@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bgapp"
+    tools:context=".ui.WinningActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp">
+            <TextView
+                android:id="@+id/tv_congrats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/congratulations"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:textColor="@color/claasified_tile"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/fredoka_one"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:id="@+id/tv_won"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/you_won"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:textColor="@color/sandybrown"
+                android:textSize="60sp"
+                android:textStyle="normal"
+                android:fontFamily="@font/bangers"/>
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="score : "
+                android:gravity="center"
+                android:textColor="@color/floralwhite"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/antic"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/animationFrame"
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+            <LinearLayout
+                android:id="@+id/winningLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/winnerAnimationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="winning_award2.json"
+                    app:lottie_loop="true">
+                </com.airbnb.lottie.LottieAnimationView>
+            </LinearLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/bottomLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/showWordsBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bgbtn"
+                    android:text="@string/show_words"
+                    android:onClick="startTypedWords"
+                    android:fontFamily="@font/fredoka_one"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -2,7 +2,9 @@ package lk.applife.english.wordchain.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import lk.applife.english.wordchain.R;
+import lk.applife.english.wordchain.utill.MyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Animation topAnim, bottomAnim;
     ImageView image;
     TextView main, slogan;
+    String LANG_CURRENT = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,5 +48,12 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }, SPLASH_SCREEN_TIMEOUT);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences preferences = newBase.getSharedPreferences("userinfo", MODE_PRIVATE);
+        LANG_CURRENT = preferences.getString("Language", "en");
+        super.attachBaseContext(MyContextWrapper.wrap(newBase, LANG_CURRENT));
     }
 }

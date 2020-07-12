@@ -10,64 +10,13 @@
     android:background="@drawable/bottom_sheet_shape">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/home_mainMarginTop"
-        android:layoutDirection="ltr"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:weightSum="4"
-        tools:ignore="UnusedAttribute">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="4"
-            android:orientation="vertical"
-            android:paddingTop="8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/userWelcome"
-                    style="@style/homeActivityUserGreetingHeader"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="10"
-                    android:text="@string/userWelcomeText" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/userWelcomeSlogan"
-                    style="@style/homeActivityUserGreetingSlogan"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/userWelcomeSloganText" />
-            </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/language"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:orientation="vertical"
         android:padding="5dp"
         android:visibility="visible">

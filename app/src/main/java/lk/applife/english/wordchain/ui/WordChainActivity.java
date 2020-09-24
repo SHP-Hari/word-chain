@@ -93,6 +93,7 @@ public class WordChainActivity extends AppCompatActivity {
     DatabaseHelper db;
     private int attemptId;
     Activity wordChainActivity;
+    boolean alertviewing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -623,6 +624,7 @@ public class WordChainActivity extends AppCompatActivity {
     }
 
     private void pauseAndLeaveGame() {
+        alertviewing = true;
         countDownTimer.cancel();
         mainGamePlayTimer.cancel();
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -642,7 +644,7 @@ public class WordChainActivity extends AppCompatActivity {
         btn_positive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                storePausePaper();
+                insertAttemptDetails(getAttemptId(), gameScore, wordsByApp, wordsByUser);
                 alertviewing = false;
                 alertDialog.cancel();
 //                finish();

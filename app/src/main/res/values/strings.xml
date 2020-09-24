@@ -60,4 +60,6 @@
     //Words Activity
     <string name="set_of_words">Set of Words</string>
     <string name="words_used_by_game_play_attempt">Words used by Game play attempt :\u0020</string>
+    <string name="pausedialog">Pause Game!</string>
+    <string name="pauseornot">Do you want to pause and finish the Game?</string>
 </resources>

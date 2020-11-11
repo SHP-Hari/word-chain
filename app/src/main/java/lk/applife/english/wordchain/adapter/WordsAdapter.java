@@ -82,7 +82,7 @@ public class WordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
 
         void setAppWordInfo(Word word){
-            text_app_word.setText(word.getWord());
+            text_app_word.setText(String.format("%s%s", word.getWord().substring(0, 1).toUpperCase(), word.getWord().substring(1).toLowerCase()));
         }
     }
 
@@ -95,7 +95,7 @@ public class WordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
 
         void setUserWordInfo(Word word){
-            text_user_word.setText(word.getWord());
+            text_user_word.setText(String.format("%s%s", word.getWord().substring(0, 1).toUpperCase(), word.getWord().substring(1).toLowerCase()));
         }
     }
 }

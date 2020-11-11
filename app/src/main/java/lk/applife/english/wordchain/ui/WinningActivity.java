@@ -27,29 +27,29 @@ public class WinningActivity extends AppCompatActivity {
     TextView congratsView;
     TextView wonView;
     TextView scoreView;
+    LinearLayout lowScore;
+    LinearLayout winningLayout;
     int score;
     int attempt;
     String LANG_CURRENT = "";
+    Animation animation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_winning);
 
-        final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
         MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
         animation.setInterpolator(interpolator);
         animation.setRepeatCount(Animation.INFINITE);
         congratsView = (TextView) findViewById(R.id.tv_congrats);
         wonView = (TextView) findViewById(R.id.tv_won);
         scoreView = (TextView) findViewById(R.id.tv_score);
+        lowScore = (LinearLayout) findViewById(R.id.lowScoreLayout);
+        winningLayout = (LinearLayout) findViewById(R.id.winningLayout);
 
         getIncomingData();
-        wonView.startAnimation(animation);
-        YoYo.with(Techniques.RubberBand)
-                .duration(1500)
-                .repeat(2)
-                .playOn(scoreView);
     }
 
     @SuppressLint("SetTextI18n")
@@ -58,7 +58,28 @@ public class WinningActivity extends AppCompatActivity {
             score = getIntent().getIntExtra("score", 0);
             attempt = getIntent().getIntExtra("attempt", 1);
             scoreView.setText(getString(R.string.your_score) + score);
+            if (score > 15){
+                showWonView();
+            }else {
+                showTryView();
+            }
         }
+    }
+
+    private void showTryView() {
+        winningLayout.setVisibility(View.GONE);
+        lowScore.setVisibility(View.VISIBLE);
+        wonView.setVisibility(View.GONE);
+    }
+
+    private void showWonView() {
+        winningLayout.setVisibility(View.VISIBLE);
+        lowScore.setVisibility(View.GONE);
+        wonView.startAnimation(animation);
+        YoYo.with(Techniques.RubberBand)
+                .duration(1500)
+                .repeat(2)
+                .playOn(scoreView);
     }
 
     public void startTypedWords(View view) {

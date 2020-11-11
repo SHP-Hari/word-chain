@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="lk.applife.english.wordchain">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.WordsActivity"></activity>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <provider android:authorities="com.facebook.app.FacebookContentProvider1269718706745881"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true" />
+        <activity android:name=".ui.WordsActivity" />
         <activity android:name=".ui.ProfileActivity" />
         <activity android:name=".ui.WinningActivity" />
         <activity

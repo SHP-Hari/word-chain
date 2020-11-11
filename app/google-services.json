@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "581006550770",
+    "firebase_url": "https://wordchain-c4e80.firebaseio.com",
+    "project_id": "wordchain-c4e80",
+    "storage_bucket": "wordchain-c4e80.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581006550770:android:430ddb0a01e3bdd8de126b",
+        "android_client_info": {
+          "package_name": "lk.applife.english.wordchain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "581006550770-6sk91d0q30j4g9i8dcns58mak1ddh2jd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "lk.applife.english.wordchain",
+            "certificate_hash": "7d219f256d41a5764cefa1687ac33ccfaaa4e816"
+          }
+        },
+        {
+          "client_id": "581006550770-3r68knjtrn814dep6t05a53ttfm2he8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ48oPNub8E0RnXifqgrCFHONx_JUcJ_M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "581006550770-3r68knjtrn814dep6t05a53ttfm2he8a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

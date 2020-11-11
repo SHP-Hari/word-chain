@@ -299,7 +299,7 @@ public class WordChainActivity extends AppCompatActivity {
 
     private void addViewAppWord(LinearLayout viewAppWord, final String appWordChar) {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                50,
+                70,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         layoutParams.rightMargin = 1;
@@ -434,7 +434,7 @@ public class WordChainActivity extends AppCompatActivity {
 
     private void addViewUserWord(LinearLayout viewUserWord, final String userWordChar) {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                50,
+                70,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         layoutParams.rightMargin = 1;

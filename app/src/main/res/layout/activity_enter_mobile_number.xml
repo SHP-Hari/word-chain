@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/white_bg"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    tools:context="lk.applife.english.wordchain.ui.EnterMobileNumberActivity"
+    tools:ignore="UnusedAttribute">
+
+    <FrameLayout
+        android:id="@+id/activationCodeFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/insertMobileNumLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/selectpaper_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:baselineAligned="false"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="20"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/subject_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="@string/enter_mobile_number"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="20"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="8dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="@string/enter_mobile_number_des"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="50dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:layout_gravity="center_horizontal"
+                        android:scrollbars="none"
+                        app:srcCompat="@drawable/ic_hand_graving_smartphone"
+                        app:tint="@color/colorPrimaryDark">
+
+                    </ImageView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="50dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <com.santalu.maskara.widget.MaskEditText
+                            android:id="@+id/edit_text_phone"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="@string/mobile_num_hint"
+                            android:inputType="phone"
+                            app:mask="+94(__) ___ __ __"
+                            app:maskCharacter="_"
+                            app:maskStyle="persistent"
+                            android:textSize="28sp"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:scrollbars="none"
+                            app:srcCompat="@drawable/ic_mobile_number_line"
+                            app:tint="@color/colorPrimary" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/mobileNumberError"
+                        style="@style/parent"
+                        android:gravity="center_horizontal"
+                        android:text="@string/pleaseTryAgain"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/didnotGetCodeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="50dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+                    <TextView
+                        android:id="@+id/didnotGetCode"
+                        style="@style/parent"
+                        android:gravity="center_horizontal"
+                        android:text="@string/notReceivedActivationCode"
+                        android:textAlignment="center"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="vertical">
+                    <Button
+                        android:id="@+id/submitNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/shapeprcoeed"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:stateListAnimator="@null"
+                        android:text="@string/submit"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

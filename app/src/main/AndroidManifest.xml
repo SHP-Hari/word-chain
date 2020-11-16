@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="lk.applife.english.wordchain">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,22 +14,70 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <provider android:authorities="com.facebook.app.FacebookContentProvider1269718706745881"
+
+        <receiver
+            android:name=".utill.SmsBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="com.google.android.gms.auth.api.phone.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED"/>
+            </intent-filter>
+        </receiver>
+        <activity android:name=".ui.EnterMobileNumberActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator"/>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
+        <provider
             android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider1269718706745881"
             android:exported="true" />
-        <activity android:name=".ui.WordsActivity" />
-        <activity android:name=".ui.ProfileActivity" />
-        <activity android:name=".ui.WinningActivity" />
+
+        <activity android:name=".ui.WordsActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator"/>
+        <activity android:name=".ui.ProfileActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator"/>
+        <activity android:name=".ui.WinningActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator"/>
         <activity
             android:name=".ui.WordChainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.HowToPlay" />
-        <activity android:name=".ui.HomeActivity" />
+        <activity android:name=".ui.HowToPlay"
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator"/>
+        <activity android:name=".ui.HomeActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator"/>
         <activity
             android:name=".ui.MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

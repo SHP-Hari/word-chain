@@ -57,7 +57,7 @@ import lk.applife.english.wordchain.utill.MyContextWrapper;
 public class WordChainActivity extends AppCompatActivity {
 
     public static final String WORDS_TEXT_FILE_PATH = "words/words_alpha.txt";
-    public static final long COUNTDOWN_IN_MILLIS = 30000;
+    public static final long COUNTDOWN_IN_MILLIS = 15000;
     public static final int MARKS_PER_CORRECT_WORD = 5;
     public static final long MAXIMUM_GAME_PLAY_TIME = 120000;
     EditText userInputEditText;
@@ -76,7 +76,7 @@ public class WordChainActivity extends AppCompatActivity {
     String LANG_CURRENT = "";
 
     private ColorStateList textColorDefaultCountdown;
-
+  
     ArrayList<String> wordList;
     ArrayList<String> wordsByApp;
     ArrayList<String> wordsByUser;

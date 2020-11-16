@@ -119,4 +119,11 @@
         <item name="android:textColor">@color/whiteTextColor</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="verifyCodeEditTextBox" parent="@android:style/TextAppearance">
+        <item name="android:inputType">textPersonName</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
 </resources>

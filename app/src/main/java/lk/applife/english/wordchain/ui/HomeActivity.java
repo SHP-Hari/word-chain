@@ -1,18 +1,19 @@
 package lk.applife.english.wordchain.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import lk.applife.english.wordchain.R;
+import lk.applife.english.wordchain.fragments.ActivateProDialogFragment;
 import lk.applife.english.wordchain.fragments.LanguageChange;
 import lk.applife.english.wordchain.utill.DatabaseHelper;
 import lk.applife.english.wordchain.utill.MyContextWrapper;
@@ -62,8 +63,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void startActivatePro(View view) {
-        Intent intent = new Intent(HomeActivity.this, WinningActivity.class);
-        startActivity(intent);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ActivateProDialogFragment.showActivateProDialog(fragmentManager);
+//        Intent intent = new Intent(HomeActivity.this, WinningActivity.class);
+//        startActivity(intent);
     }
 
     public void startProfile(View view) {

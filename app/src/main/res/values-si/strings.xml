@@ -6,7 +6,7 @@
     <string name="userWelcomeSloganText">ඉංග්‍රීසි වචන මාලාව පුහුණු කරමු</string>
     <string name="playGame">සෙල්ලම් කරන්න</string>
     <string name="playGameDescription">ක්‍රීඩා විස්තරය</string>
-    <string name="howToPlayText">ක්රීඩා කරන්නේ කෙසේද</string>
+    <string name="howToPlayText">සෙල්ලම් කරන ආකාරය</string>
     <string name="howToPlayDescription">විස්තරය සෙල්ලම් කරන්නේ කෙසේද</string>
     <string name="activateProText">Pro සක්‍රිය කරන්න</string>
     <string name="activateProDescription">විස්තරය සක්‍රිය කරන්න</string>
@@ -15,13 +15,13 @@
 
     //How To Play Activity
     <string name="playStep1">පියවර 01</string>
-    <string name="playStepInfo1">තොරතුරු 1</string>
+    <string name="playStepInfo1">ඇප් එකෙන් පළමුව ඔබට වචනයක් ලබාදෙනු ඇත.</string>
     <string name="playStep2">පියවර 02</string>
     <string name="playStep3">පියවර 03</string>
     <string name="playStep4">පියවර 04</string>
-    <string name="playStepInfo2">තොරතුරු 2</string>
-    <string name="playStepInfo3">තොරතුරු 3</string>
-    <string name="playStepInfo4">තොරතුරු 4</string>
+    <string name="playStepInfo2">එම වචනයේ අවසාන අකුරෙන් පටන් ගන්නා වචනයක් ඔබ ලබාදිය යුතුය.</string>
+    <string name="playStepInfo3">එවිට ඇප් එක නැවත ඔබ ලබා දුන් වචනයේ අවසාන අකුරෙන් පටන් ගන්නා වචනයක් ලබා දෙයි.</string>
+    <string name="playStepInfo4">කාලය අවසාන වන තෙක් හෝ එක් අයෙක්(ඔබ හෝ ඇප් එක) පරදින තුරු සෙල්ලම් කළ හැකිය.</string>
 
     //Change Language Bottom Sheet
     <string name="languageLabel">කැමති භාෂාව තෝරන්න</string>
@@ -61,4 +61,9 @@
     //Words Activity
     <string name="set_of_words">වචන කට්ටලය</string>
     <string name="words_used_by_game_play_attempt">ගේම් ප්ලේ උත්සාහයෙන් භාවිතා වන වචන :\u0020</string>
+    <string name="pausedialog">Pause Game!</string>
+    <string name="pauseornot">Do you want to pause and finish the Game?</string>
+    <string name="activate_pro_dialog_title">Activate Pro</string>
+    <string name="activate_pro_dialog_description">Enjoy premium benifits by activating pro</string>
+    <string name="proceed">PROCEED</string>
 </resources>

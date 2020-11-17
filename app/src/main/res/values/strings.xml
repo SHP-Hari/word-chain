@@ -73,13 +73,11 @@
     <string name="pleaseTryAgain">Please Try Again</string>
     <string name="notReceivedActivationCode">Did\'t received the code?</string>
     <string name="submit">Submit</string>
-    <string name="DIALOG">Dialog</string>
-    <string name="MOBITEL">Mobitel</string>
-    <string name="HUTCH">Hutch</string>
-    <string name="AIRTEL">Airtel</string>
+    <string name="DIALOG" translatable="false">Dialog</string>
+    <string name="MOBITEL" translatable="false">Mobitel</string>
+    <string name="HUTCH" translatable="false">Hutch</string>
+    <string name="AIRTEL" translatable="false">Airtel</string>
     <string name="err_no_mobile_num">Please enter your mobile number</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="coundownDescription">Please Wait...!</string>
     <string name="activateSubscription">Activate</string>
     <string name="classifiedSubscriptionCodeError">Please enter 6-Digit code properly</string>

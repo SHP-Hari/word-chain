@@ -59,7 +59,7 @@
                             android:gravity="center_horizontal"
                             android:text="@string/enter_mobile_number"
                             android:textColor="@android:color/black"
-                            android:textSize="18sp" />
+                            android:textSize="24sp" />
 
                     </LinearLayout>
 
@@ -79,7 +79,7 @@
                             android:gravity="center_horizontal"
                             android:text="@string/enter_mobile_number_des"
                             android:textColor="@android:color/black"
-                            android:textSize="14sp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 
@@ -96,8 +96,7 @@
                         android:layout_height="250dp"
                         android:layout_gravity="center_horizontal"
                         android:scrollbars="none"
-                        app:srcCompat="@drawable/ic_hand_graving_smartphone"
-                        app:tint="@color/colorPrimaryDark">
+                        app:srcCompat="@drawable/ic_mobile_in_hand">
 
                     </ImageView>
 

@@ -5,11 +5,11 @@
     <string name="userWelcomeText">ආයුබෝවන්!</string>
     <string name="userWelcomeSloganText">ඉංග්‍රීසි වචන මාලාව පුහුණු කරමු</string>
     <string name="playGame">සෙල්ලම් කරන්න</string>
-    <string name="playGameDescription">ක්‍රීඩා විස්තරය</string>
+    <string name="playGameDescription">සෙල්ලම් කිරීමට මෙතනින් යන්න</string>
     <string name="howToPlayText">සෙල්ලම් කරන ආකාරය</string>
-    <string name="howToPlayDescription">විස්තරය සෙල්ලම් කරන්නේ කෙසේද</string>
+    <string name="howToPlayDescription">සෙල්ලම් කරන ආකාරය බලන්න</string>
     <string name="activateProText">Pro සක්‍රිය කරන්න</string>
-    <string name="activateProDescription">විස්තරය සක්‍රිය කරන්න</string>
+    <string name="activateProDescription">Pro පහසුකම් භාවිතා කිරීමට Pro සක්‍රිය කරන්න</string>
     <string name="changelang">භාෂාව වෙනස් කරන්න</string>
     <string name="hello">ආයුබෝවන්\u0020</string>
 
@@ -32,17 +32,17 @@
     <string name="playText">WORD CHAIN</string>
     <string name="submitText">ඉදිරිපත් කරන්න</string>
     <string name="cancelcl">අවලංගු කරන්න</string>
-    <string name="emptyUsernaName">ඔබේ නම ඇතුලත් කරන්න</string>
-    <string name="invalidUserName">පරිශීලක නාමයේ අකුරු පමණක් අඩංගු විය යුතුය</string>
+    <string name="emptyUsernaName">කරුණාකර ඔබේ නම ඇතුලත් කරන්න</string>
+    <string name="invalidUserName">පපරිශීලක නාමය සඳහා අකුරු පමණක් ඇතුලත් විය යුතුය</string>
     <string name="ok">හරි</string>
     <string name="enter_your_name">ඔබේ නම ඇතුළත් කරන්න</string>
     <string name="name">නම</string>
 
     //splash screen
-    <string name="splash_description">ඉංග්‍රීසි වචන මාලාව පුහුණු කරමු</string>
+    <string name="splash_description">ඉංග්‍රීසි වචන මාලාව පුහුණු වෙමු</string>
 
     //Profile Activity
-    <string name="play_profile">සෙල්ලම්</string>
+    <string name="play_profile">සෙල්ලම් වාර</string>
     <string name="score_profile">ලකුණු</string>
     <string name="words_profile">වචන</string>
     <string name="noScoresYet">ඔබට තවම ලකුණු නොමැත</string>
@@ -55,15 +55,25 @@
     <string name="your_score">ඔබේ ලකුණු :\u0020</string>
 
     //Word Chain Activity
-    <string name="game_over">ක්රිඩාව අවසන් වෙනවා!</string>
-    <string name="main_time_finished">ප්‍රධාන ක්‍රීඩා කාලය අවසන්</string>
+    <string name="game_over">තරඟය අවසානයි!</string>
+    <string name="main_time_finished">ප්‍රධාන තරඟ කාලය අවසන්</string>
 
     //Words Activity
-    <string name="set_of_words">වචන කට්ටලය</string>
-    <string name="words_used_by_game_play_attempt">ගේම් ප්ලේ උත්සාහයෙන් භාවිතා වන වචන :\u0020</string>
-    <string name="pausedialog">Pause Game!</string>
-    <string name="pauseornot">Do you want to pause and finish the Game?</string>
+    <string name="set_of_words">වචන කට්ටලය මතක තබාගන්න</string>
+    <string name="words_used_by_game_play_attempt">පහත වචන කට්ටලය භාවිත වූ තරඟ වාරය:\u0020</string>
+    <string name="pausedialog">තරඟය නතර කරන්න!</string>
+    <string name="pauseornot">ඔබට තරඟය නතර කර ඉවත් වීමට අවශ්‍යද?</string>
     <string name="activate_pro_dialog_title">Activate Pro</string>
-    <string name="activate_pro_dialog_description">Enjoy premium benifits by activating pro</string>
-    <string name="proceed">PROCEED</string>
+    <string name="activate_pro_dialog_description">WordChain Pro සක්‍රිය කර වැඩි පහසුකම් අත්විදින්න. ඔබට වැය වන්නේ දිනකට රුපියල් පහක් සහ අදාල බදු පමණයි.</string>
+    <string name="proceed">ඉදිරියට යමු</string>
+    <string name="enter_mobile_number">ඔබේ දුරකථන අංකය ඇතුලත් කරන්න</string>
+    <string name="enter_mobile_number_des">ඔබේ දුරකථන අංකය පහත ඇතුලත් කර SMS මගින් ලැබෙන PIN එක ලබාගන්න.</string>
+    <string name="mobile_num_hint">+94(7X)-XXX-XXXX</string>
+    <string name="pleaseTryAgain">නැවත උත්සාහ කරන්න </string>
+    <string name="notReceivedActivationCode">PIN එක ලැබුනේ නැත</string>
+    <string name="submit">Submit</string>
+    <string name="err_no_mobile_num">ඔබේ දුරකථන අංකය ඇතුලත් කරන්න</string>
+    <string name="coundownDescription">කරුණාකර රැඳී සිටින්න...!</string>
+    <string name="activateSubscription">සක්‍රිය කරන්න</string>
+    <string name="classifiedSubscriptionCodeError">කරුණාකර SMS මගින් ලැබෙන ඉලක්කම් 6ක PIN එක ඇතුලත් කරන්න</string>
 </resources>

@@ -1,9 +1,5 @@
 package lk.applife.english.wordchain.ui;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -36,7 +32,10 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -52,14 +51,18 @@ import java.util.regex.Pattern;
 
 import lk.applife.english.wordchain.R;
 import lk.applife.english.wordchain.utill.DatabaseHelper;
+import lk.applife.english.wordchain.utill.GlabalValues;
 import lk.applife.english.wordchain.utill.MyContextWrapper;
+
+import static lk.applife.english.wordchain.ui.HomeActivity.USER_PREFERENCES;
 
 public class WordChainActivity extends AppCompatActivity {
 
     public static final String WORDS_TEXT_FILE_PATH = "words/words_alpha.txt";
-    public static final long COUNTDOWN_IN_MILLIS = 15000;
     public static final int MARKS_PER_CORRECT_WORD = 5;
-    public static final long MAXIMUM_GAME_PLAY_TIME = 120000;
+    private long MAXIMUM_GAME_PLAY_TIME;
+    private long COUNTDOWN_IN_MILLIS;
+
     EditText userInputEditText;
     Button submit;
     HorizontalScrollView appWordHorizontalScroll;
@@ -74,6 +77,8 @@ public class WordChainActivity extends AppCompatActivity {
     TextView wordsCompleted;
     TextView duration;
     String LANG_CURRENT = "";
+    SharedPreferences userPreference;
+    int userSubscriptionStatus;
 
     private ColorStateList textColorDefaultCountdown;
   
@@ -94,6 +99,22 @@ public class WordChainActivity extends AppCompatActivity {
     private int attemptId;
     Activity wordChainActivity;
     boolean alertviewing = false;
+
+    public long getMAXIMUM_GAME_PLAY_TIME() {
+        return MAXIMUM_GAME_PLAY_TIME;
+    }
+
+    public void setMAXIMUM_GAME_PLAY_TIME(long MAXIMUM_GAME_PLAY_TIME) {
+        this.MAXIMUM_GAME_PLAY_TIME = MAXIMUM_GAME_PLAY_TIME;
+    }
+
+    public long getCOUNTDOWN_IN_MILLIS() {
+        return COUNTDOWN_IN_MILLIS;
+    }
+
+    public void setCOUNTDOWN_IN_MILLIS(long COUNTDOWN_IN_MILLIS) {
+        this.COUNTDOWN_IN_MILLIS = COUNTDOWN_IN_MILLIS;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,12 +151,24 @@ public class WordChainActivity extends AppCompatActivity {
         wordsByApp = new ArrayList<>();
         wordsByUser = new ArrayList<>();
         textColorDefaultCountdown = duration.getTextColors();
+        userPreference = this.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
         db = new DatabaseHelper(this);
         wordChainActivity = (Activity) WordChainActivity.this;
-
+        getUserSubscriptionStatus();
 //        db.insertQuizAttemptMarks(20);
         new InitialWord().execute();
 
+    }
+
+    private void getUserSubscriptionStatus() {
+        userSubscriptionStatus = userPreference.getInt("userSubscriptionStatus", 0);
+        if (userSubscriptionStatus == 1){ //premium user
+            setCOUNTDOWN_IN_MILLIS(GlabalValues.COUNTDOWN_IN_MILLIS_PREMIUM);
+            setMAXIMUM_GAME_PLAY_TIME(GlabalValues.GAME_PLAY_TIME_PREMIUM);
+        }else { //Non Premium user
+            setCOUNTDOWN_IN_MILLIS(GlabalValues.COUNTDOWN_IN_MILLIS_NON_PREMIUM);
+            setMAXIMUM_GAME_PLAY_TIME(GlabalValues.GAME_PLAY_TIME_NON_PREMIUM);
+        }
     }
 
     private void showLoadingAnimation() {
@@ -242,7 +275,7 @@ public class WordChainActivity extends AppCompatActivity {
             addViewAppWord((LinearLayout) findViewById(R.id.appWordLayout), key);
         }
 
-        timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+        timeLeftInMillis = getCOUNTDOWN_IN_MILLIS();
         startCountDown();
     }
 
@@ -275,9 +308,9 @@ public class WordChainActivity extends AppCompatActivity {
             addViewAppWord((LinearLayout) findViewById(R.id.appWordLayout), key);
         }
 
-        timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+        timeLeftInMillis = getCOUNTDOWN_IN_MILLIS();
         startCountDown();
-        timeLeftInMillisGamePlay = MAXIMUM_GAME_PLAY_TIME;
+        timeLeftInMillisGamePlay = getMAXIMUM_GAME_PLAY_TIME();
         startMainGamePlayCountDown();
     }
 
@@ -299,8 +332,8 @@ public class WordChainActivity extends AppCompatActivity {
 
     private void addViewAppWord(LinearLayout viewAppWord, final String appWordChar) {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                70,
-                LinearLayout.LayoutParams.WRAP_CONTENT
+                80,
+                80
         );
         layoutParams.rightMargin = 1;
         layoutParams.leftMargin = 1;
@@ -377,7 +410,6 @@ public class WordChainActivity extends AppCompatActivity {
 
     private void timeUp(){
         countDownTimer.cancel();
-        Toast.makeText(this, "Time Up Buddy!", Toast.LENGTH_SHORT).show();
         endAttempt();
     }
 

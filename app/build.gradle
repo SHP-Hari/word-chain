@@ -23,6 +23,14 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "SERVER_URL", '"http://applife.lk/wordchain/wordchain_api/api/"'
+            buildConfigField "String", "APP_HASH", '"46cxj4GKXOL"'
+            //Google Signed App Hash
+            //buildConfigField "String", "APP_HASH", '"---"'
+        }
+        debug {
+            buildConfigField "String", "SERVER_URL", '"http://applife.lk/wordchain/wordchain_api/api/"'
+            buildConfigField "String", "APP_HASH", '"m/k0iC+ot+A"'
         }
     }
 
@@ -61,6 +69,9 @@ dependencies {
 
     //Facebook SDK
     implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
+
+    //Volley
+    implementation 'com.android.volley:volley:1.1.1'
 
     //Third party
     implementation 'com.github.santalu:maskara:1.0.0'

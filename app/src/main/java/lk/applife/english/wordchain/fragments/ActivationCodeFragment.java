@@ -1,8 +1,12 @@
 package lk.applife.english.wordchain.fragments;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,18 +29,38 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import lk.applife.english.wordchain.BuildConfig;
 import lk.applife.english.wordchain.R;
 import lk.applife.english.wordchain.interfaces.OtpReceivedInterface;
+import lk.applife.english.wordchain.ui.EnterMobileNumberActivity;
+import lk.applife.english.wordchain.ui.HomeActivity;
+import lk.applife.english.wordchain.utill.CustomSnackbar;
+import lk.applife.english.wordchain.utill.GlabalValues;
 import lk.applife.english.wordchain.utill.SmsBroadcastReceiver;
 
 
@@ -45,7 +69,7 @@ public class ActivationCodeFragment extends Fragment implements OtpReceivedInter
     public static final String TAG = "ActivationCodeFragment";
     public static final String CODE_NOT_FOUND = "E1850";
     public static final String CODE_EXPIRED = "EC1001";
-    public static final String SUBSCRIPTION_INACTIVE = "E1850";
+//    public static final String SUBSCRIPTION_INACTIVE = "E1850";
     public static final String INSERT_MOBILENUM_FRAGMENT = "ENTER_MOBILE_NUM";
     private static final long START_TIME_IN_MILLIS = 60000;
 
@@ -70,6 +94,7 @@ public class ActivationCodeFragment extends Fragment implements OtpReceivedInter
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    CustomSnackbar snackbarNoConnection;
 
     public ActivationCodeFragment() {
         // Required empty public constructor
@@ -79,8 +104,8 @@ public class ActivationCodeFragment extends Fragment implements OtpReceivedInter
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_activation_code, container, false);
-//        referenceNumber = this.getArguments().getString(EnterMobileNumberFragment.REFERENCE_CODE);
-//        userCarrier = this.getArguments().getString(EnterMobileNumberFragment.USER_CARRIER);
+        referenceNumber = this.getArguments().getString(EnterMobileNumberActivity.REFERENCE_CODE);
+        userCarrier = this.getArguments().getString(EnterMobileNumberActivity.USER_CARRIER);
         fragmentPlaceholder = getActivity().findViewById(R.id.activationCodeFragment);
         mobileNumLayout = getActivity().findViewById(R.id.insertMobileNumLayout);
         verifyCode = view.findViewById(R.id.activateCode);
@@ -135,7 +160,7 @@ public class ActivationCodeFragment extends Fragment implements OtpReceivedInter
                     subscriptionCodeError.setVisibility(View.VISIBLE);
                     subscriptionCodeError.setText(R.string.classifiedSubscriptionCodeError);
                 } else {
-                    sendSubscriptionCodeToServer();
+                    sendOTPToServer();
                 }
             }
         });
@@ -288,8 +313,81 @@ public class ActivationCodeFragment extends Fragment implements OtpReceivedInter
 
     }
 
-    private void sendSubscriptionCodeToServer() {
-        Toast.makeText(getActivity(), "OTP : "+activationCode, Toast.LENGTH_SHORT).show();
+    private void sendOTPToServer() {
+        if (checkConnection()){
+            subscriptionCodeError.setVisibility(View.GONE);
+            verifyCode.setText(R.string.pleasewait);
+            verifyCode.setEnabled(false);
+            final Activity activity = getActivity();
+            String OTP_VERIFICATION_POST = BuildConfig.SERVER_URL + "v1/pin-api/verify";
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, OTP_VERIFICATION_POST,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if (activity != null && isAdded()){
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    Boolean error = jsonObject.getBoolean("error");
+
+                                    if (!error) {
+                                        Snackbar.make(insertCodeLayout, "Code Verified Successfully", Snackbar.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getContext(), HomeActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        verifyCode.setText(R.string.activateSubscription);
+                                        verifyCode.setEnabled(true);
+                                        subscriptionCodeError.setVisibility(View.VISIBLE);
+                                        String errorCode = null;
+                                        errorCode = jsonObject.getString("err_code");
+                                        if (errorCode.equals(CODE_NOT_FOUND)) {
+                                            subscriptionCodeError.setText(getString(R.string.subscriptionCodeNotFound));
+                                        } else if (errorCode.equals(CODE_EXPIRED)) {
+                                            subscriptionCodeError.setText(getString(R.string.subscriptionCodeExpired));
+                                        } else {
+                                            subscriptionCodeError.setText(getString(R.string.pleaseTryAgain));
+                                        }
+                                    }
+                                } catch (JSONException e) {
+                                }
+                            }
+                        }
+
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            }) {
+
+                @Override
+                public byte[] getBody() {
+                    String post_data;
+                    post_data = "{\"reference_no\" : \"" + referenceNumber + "\",\n" +
+                            "\"otp\" : \"" + activationCode + "\",\n" +
+                            "\"provider\" : \"" + userCarrier + "\"}";
+                    return post_data.getBytes();
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", GlabalValues.api_key);
+                    return params;
+                }
+            };
+
+            stringRequest.setRetryPolicy(new DefaultRetryPolicy(20000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()));
+            requestQueue.add(stringRequest);
+        }else {
+            snackbarNoConnection = CustomSnackbar.make(insertCodeLayout, CustomSnackbar.LENGTH_INDEFINITE).setText("No internet connection.");
+            snackbarNoConnection.setAction("RETRY", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sendOTPToServer();
+                }
+            });
+        }
     }
 
     @Override
@@ -316,7 +414,7 @@ public class ActivationCodeFragment extends Fragment implements OtpReceivedInter
     }
 
     private void getOtpFromMessage(String message) {
-        Pattern pattern = Pattern.compile("(Word Chain Subscription Code is) (.{6})");
+        Pattern pattern = Pattern.compile("(Your PIN is) (.{6})");
         Matcher matcher = pattern.matcher(message);
         if (matcher.find()) {
             String subscriptionCode = matcher.group(2);
@@ -325,7 +423,7 @@ public class ActivationCodeFragment extends Fragment implements OtpReceivedInter
                     editTexts[i].setText(String.valueOf(subscriptionCode.charAt(i)));
                 }
                 editTexts[editTexts.length-1].requestFocus();
-                sendSubscriptionCodeToServer();
+                sendOTPToServer();
             }
         }
     }
@@ -335,5 +433,11 @@ public class ActivationCodeFragment extends Fragment implements OtpReceivedInter
         super.onDetach();
         mobileNumLayout.setVisibility(View.VISIBLE);
         fragmentPlaceholder.setVisibility(View.GONE);
+    }
+
+    public boolean checkConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) Objects.requireNonNull(getActivity()).getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null) && (networkInfo.isConnected());
     }
 }

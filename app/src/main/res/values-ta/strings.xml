@@ -5,11 +5,11 @@
     <string name="userWelcomeText">வணக்கம்!</string>
     <string name="userWelcomeSloganText">ஆங்கில சொற்களஞ்சியத்தை பயிற்சி செய்வோம்</string>
     <string name="playGame">விளையாடு</string>
-    <string name="playGameDescription">விளையாட்டு விவரம்</string>
-    <string name="howToPlayText">விளையாட்டு விதிமுறைகள்</string>
-    <string name="howToPlayDescription">எப்படி விளையாடுவது விளக்கம்</string>
+    <string name="playGameDescription">விளையாட்டை விளையாட இங்கே அழுத்தவும்.</string>
+    <string name="howToPlayText">எப்படி விளையாடுவது</string>
+    <string name="howToPlayDescription">விளையாட்டை எவ்வாறு விளையாடுவது என்பதற்கான வழிமுறைகளைக் காண இங்கே அழுத்தவும்.</string>
     <string name="activateProText">புரோவை செயல்படுத்து</string>
-    <string name="activateProDescription">விளக்கம் செயல்படுத்து</string>
+    <string name="activateProDescription">இந்த ஆப்பின் புரோ அம்சத்தை நீங்கள் செயல்படுத்தலாம் மற்றும் பயன்படுத்தலாம்</string>
     <string name="changelang">மொழியை மாற்றுங்கள்</string>
     <string name="hello">வணக்கம்\u0020</string>
 
@@ -46,7 +46,7 @@
     <string name="score_profile">மதிப்பெண்</string>
     <string name="words_profile">சொற்கள்</string>
     <string name="noScoresYet">உங்களிடம் இதுவரை எந்த மதிப்பெண்களும் இல்லை</string>
-    <string name="start_game">தொடக்கம் விளையாட்டு</string>
+    <string name="start_game">விளையாடு</string>
 
     //Winning Activity
     <string name="congratulations">வாழ்த்துக்கள்!!</string>
@@ -56,14 +56,24 @@
 
     //Word Chain Activity
     <string name="game_over">விளையாட்டு முடிந்தது!</string>
-    <string name="main_time_finished">முதன்மை விளையாட்டு நேரம் முடிந்தது</string>
+    <string name="main_time_finished">விளையாட்டு நேரம் முடிந்தது</string>
 
     //Words Activity
-    <string name="set_of_words">சொற்களின் தொகுப்பு</string>
-    <string name="words_used_by_game_play_attempt">விளையாட்டு முயற்சியினால் பயன்படுத்தப்பட்ட வார்த்தைகள் :\u0020</string>
-    <string name="pausedialog">Pause Game!</string>
-    <string name="pauseornot">Do you want to pause and finish the Game?</string>
-    <string name="activate_pro_dialog_title">Activate Pro</string>
-    <string name="activate_pro_dialog_description">Enjoy premium benifits by activating pro</string>
-    <string name="proceed">PROCEED</string>
+    <string name="set_of_words">நினைவில் கொள்ள வேண்டிய சொற்களின் தொகுப்பு</string>
+    <string name="words_used_by_game_play_attempt">விளையாட்டின் பொது ஏற்கனவே பயன்படுத்தப்பட்ட வார்த்தைகள், முயற்சி  :\u0020</string>
+    <string name="pausedialog">இடைநிறுத்தம்!</string>
+    <string name="pauseornot">நீங்கள் விளையாட்டை இடைநிறுத்தி முடிக்க விரும்புகிறீர்களா?</string>
+    <string name="activate_pro_dialog_title">புரோவை செயல்படுத்து</string>
+    <string name="activate_pro_dialog_description">ஒரு நாளைக்கு ஐந்து ரூபாய் மற்றும் வரிக்கு பிரீமியம் சலுகைகளை அனுபவிக்க வேர்ட்செயின் புரோவை செயல்படுத்தவும்.</string>
+    <string name="proceed">தொடரவும்</string>
+    <string name="enter_mobile_number">உங்கள் மொபைல் எண்ணை உள்ளிடவும்</string>
+    <string name="enter_mobile_number_des">குறியீட்டு இலக்கத்தை பெற கீழே உங்கள் மொபைல் இலக்கத்தை உள்ளிடவும்</string>
+    <string name="mobile_num_hint">+94(7X)-XXX-XXXX</string>
+    <string name="pleaseTryAgain">தயவு செய்து மீண்டும் முயற்சிக்கவும்</string>
+    <string name="notReceivedActivationCode">குறியீட்டைப் பெறவில்லையா?</string>
+    <string name="submit">சமர்ப்பிக்கவும்</string>
+    <string name="err_no_mobile_num">உங்கள் மொபைல் எண்ணை உள்ளிடவும்</string>
+    <string name="coundownDescription">மீண்டும் முயற்சிக்கவும்…!</string>
+    <string name="activateSubscription">செயல்படுத்த</string>
+    <string name="classifiedSubscriptionCodeError">6 இலக்க குறியீட்டை சரியாக உள்ளிடவும்</string>
 </resources>

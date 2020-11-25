@@ -6,11 +6,11 @@
     <string name="userWelcomeText">Hello There!</string>
     <string name="userWelcomeSloganText">Let\'s Practise English Vocabulary</string>
     <string name="playGame">Play Game</string>
-    <string name="playGameDescription">Play Game Description</string>
+    <string name="playGameDescription">Tap here to play the game.</string>
     <string name="howToPlayText">How To Play</string>
-    <string name="howToPlayDescription">Description how to play</string>
+    <string name="howToPlayDescription">Tap here to view the instructions on how to play the game.</string>
     <string name="activateProText">Activate Pro</string>
-    <string name="activateProDescription">Description Activate pro</string>
+    <string name="activateProDescription">You can activate and use the pro feature of this application</string>
     <string name="changelang">Change Language</string>
     <string name="hello">Hello \u0020</string>
 
@@ -57,17 +57,17 @@
 
     //Word Chain Activity
     <string name="game_over">Game Over!</string>
-    <string name="main_time_finished">Main Game Play Time has been Finished</string>
+    <string name="main_time_finished">Time Up!!!</string>
 
     //Words Activity
-    <string name="set_of_words">Set of Words</string>
+    <string name="set_of_words">Set of Words to Remember</string>
     <string name="words_used_by_game_play_attempt">Words used by Game play attempt :\u0020</string>
     <string name="pausedialog">Pause Game!</string>
     <string name="pauseornot">Do you want to pause and finish the Game?</string>
     <string name="activate_pro_dialog_title">Activate Pro</string>
-    <string name="activate_pro_dialog_description">Enjoy premium benifits by activating pro</string>
+    <string name="activate_pro_dialog_description">Please activate the WordChain pro to Enjoy premium benefits just for five rupees plus tax per day.</string>
     <string name="proceed">PROCEED</string>
-    <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="enter_mobile_number">Please enter your mobile number</string>
     <string name="enter_mobile_number_des">Enter your mobile number below and get SMS pin to activate</string>
     <string name="mobile_num_hint">+94(7X)-XXX-XXXX</string>
     <string name="pleaseTryAgain">Please Try Again</string>
@@ -78,7 +78,14 @@
     <string name="HUTCH" translatable="false">Hutch</string>
     <string name="AIRTEL" translatable="false">Airtel</string>
     <string name="err_no_mobile_num">Please enter your mobile number</string>
-    <string name="coundownDescription">Please Wait...!</string>
+    <string name="coundownDescription">Please Wait…!</string>
     <string name="activateSubscription">Activate</string>
     <string name="classifiedSubscriptionCodeError">Please enter 6-Digit code properly</string>
+    <string name="alreadyPremiumUser">You are already a Premium User</string>
+    <string name="unableToGetSubsStatus">Unable to get user Subscription information. Please Try Again!</string>
+    <string name="mobileNumberPrefix" translatable="false">94</string>
+    <string name="pleasewait">PLEASE WAIT...</string>
+    <string name="err_something_wrong">Something went wrong. Try Again.</string>
+    <string name="subscriptionCodeNotFound">Invalid OTP Code</string>
+    <string name="subscriptionCodeExpired">Code has been Expired</string>
 </resources>

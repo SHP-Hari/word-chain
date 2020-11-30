@@ -76,4 +76,10 @@
     <string name="coundownDescription">மீண்டும் முயற்சிக்கவும்…!</string>
     <string name="activateSubscription">செயல்படுத்த</string>
     <string name="classifiedSubscriptionCodeError">6 இலக்க குறியீட்டை சரியாக உள்ளிடவும்</string>
+    <string name="alreadyPremiumUser">நீங்கள் ஏற்கனவே பிரீமியம் பயனர்</string>
+    <string name="unableToGetSubsStatus">பயனர் பிரீமியம் தகவலைப் பெற முடியவில்லை. தயவு செய்து மீண்டும் முயற்சிக்கவும்!</string>
+    <string name="pleasewait">காத்திருக்கவும்…</string>
+    <string name="err_something_wrong">ஏதோ தவறு நடந்துவிட்டது. மீண்டும் முயற்சிக்கவும்.</string>
+    <string name="subscriptionCodeNotFound">தவறான OTP குறியீடு</string>
+    <string name="subscriptionCodeExpired">குறியீடு காலாவதியானது</string>
 </resources>

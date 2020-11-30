@@ -73,7 +73,13 @@
     <string name="notReceivedActivationCode">PIN එක ලැබුනේ නැත</string>
     <string name="submit">Submit</string>
     <string name="err_no_mobile_num">ඔබේ දුරකථන අංකය ඇතුලත් කරන්න</string>
-    <string name="coundownDescription">කරුණාකර රැඳී සිටින්න...!</string>
+    <string name="coundownDescription">කරුණාකර රැඳී සිටින්න…!</string>
     <string name="activateSubscription">සක්‍රිය කරන්න</string>
     <string name="classifiedSubscriptionCodeError">කරුණාකර SMS මගින් ලැබෙන ඉලක්කම් 6ක PIN එක ඇතුලත් කරන්න</string>
+    <string name="alreadyPremiumUser">ඔබ දැනටමත් Premium සාමාජිකයෙකි</string>
+    <string name="unableToGetSubsStatus">දායකත්ව විස්තර ලබාගැනීමට නොහැකි විය, කරුණාකර නැවත උත්සාහ කරන්න.</string>
+    <string name="pleasewait">කරුණාකර රැඳී සිටින්න…</string>
+    <string name="err_something_wrong">යමක් වැරදී ඇත, කරුණාකර නැවත උත්සාහ කරන්න</string>
+    <string name="subscriptionCodeNotFound">OTP එක වැරදි</string>
+    <string name="subscriptionCodeExpired">Code එක කල් ඉකුත් වී ඇත</string>
 </resources>

@@ -2,6 +2,7 @@ package lk.applife.english.wordchain.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 
 import lk.applife.english.wordchain.R;
 import lk.applife.english.wordchain.model.UserAttempt;
+import lk.applife.english.wordchain.ui.EnterMobileNumberActivity;
+import lk.applife.english.wordchain.ui.HomeActivity;
 import lk.applife.english.wordchain.ui.WordsActivity;
+import lk.applife.english.wordchain.utill.CustomSnackbar;
 
 /**
  * Created by Android Studio.
@@ -32,10 +38,12 @@ public class AttemptsAdapter extends RecyclerView.Adapter<AttemptsAdapter.Attemp
     private Context context;
     private ArrayList<UserAttempt> userAttempts;
     private int checkedPosition = 0;
+    SharedPreferences userPreference;
 
     public AttemptsAdapter(Context context, ArrayList<UserAttempt> userAttempts) {
         this.context = context;
         this.userAttempts = userAttempts;
+        this.userPreference = context.getSharedPreferences(HomeActivity.USER_PREFERENCES, Context.MODE_PRIVATE);
     }
 
     public void setUserAttempts(ArrayList<UserAttempt> userAttempts) {
@@ -66,6 +74,8 @@ public class AttemptsAdapter extends RecyclerView.Adapter<AttemptsAdapter.Attemp
         private TextView attemptNumber;
         private TextView attemptMarks;
         private ImageView openWordsBtn;
+        int userSubscriptionStatus = userPreference.getInt("userSubscriptionStatus", 0);
+        CustomSnackbar snackbarSubscribed;
         public AttemptViewHolder(@NonNull View itemView) {
             super(itemView);
             attemptNumber = (TextView) itemView.findViewById(R.id.attemptNumber);
@@ -74,14 +84,24 @@ public class AttemptsAdapter extends RecyclerView.Adapter<AttemptsAdapter.Attemp
             openWordsBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    openWordsBtn.setVisibility(View.VISIBLE);
-                    if (checkedPosition != getAdapterPosition()) {
-                        notifyItemChanged(checkedPosition);
-                        checkedPosition = getAdapterPosition();
+                    if (userSubscriptionStatus != 1) {
+                        Snackbar.make(attemptMarks, "This feature is only available for the Pro user", Snackbar.LENGTH_INDEFINITE).setAction("Activate", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(context, EnterMobileNumberActivity.class);
+                                context.startActivity(intent);
+                            }
+                        }).show();
+                    }else {
+                        openWordsBtn.setVisibility(View.VISIBLE);
+                        if (checkedPosition != getAdapterPosition()) {
+                            notifyItemChanged(checkedPosition);
+                            checkedPosition = getAdapterPosition();
+                        }
+                        Intent words = new Intent(context, WordsActivity.class);
+                        words.putExtra("attempt_id", getSelected().getId());
+                        context.startActivity(words);
                     }
-                    Intent words = new Intent(context, WordsActivity.class);
-                    words.putExtra("attempt_id", getSelected().getId());
-                    context.startActivity(words);
                 }
             });
         }

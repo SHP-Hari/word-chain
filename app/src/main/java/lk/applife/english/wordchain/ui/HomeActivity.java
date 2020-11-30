@@ -12,7 +12,10 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +42,7 @@ import lk.applife.english.wordchain.fragments.LanguageChange;
 import lk.applife.english.wordchain.utill.CustomSnackbar;
 import lk.applife.english.wordchain.utill.DatabaseHelper;
 import lk.applife.english.wordchain.utill.GlabalValues;
+import lk.applife.english.wordchain.utill.MyBounceInterpolator;
 import lk.applife.english.wordchain.utill.MyContextWrapper;
 
 public class HomeActivity extends AppCompatActivity {
@@ -56,6 +60,8 @@ public class HomeActivity extends AppCompatActivity {
     String LANG_CURRENT = "";
     CustomSnackbar snackbarNoConnection, snackbarSubscribed;
     String userMobile;
+    ImageView userProfile;
+    Animation animation;
     int userSubscriptionStatus;
 
     @SuppressLint("SetTextI18n")
@@ -64,10 +70,16 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+        animation.setInterpolator(interpolator);
+        Animation connectingAnimation = AnimationUtils.loadAnimation(this, R.anim.alpha_scale_animation);
         mainLayout = (LinearLayout) findViewById(R.id.mainLayout);
         rootView = findViewById(android.R.id.content);
         openBottomSheet = (Button) findViewById(R.id.openLanguageSheetBtn);
         userWelcome = (TextView) findViewById(R.id.userWelcome);
+        userProfile = (ImageView) findViewById(R.id.userProfile);
+        userProfile.startAnimation(connectingAnimation);
         userInfoPreference = getSharedPreferences(USER_INFO_PREFERENCES, Context.MODE_PRIVATE);
         userPreference = this.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
         userName = userInfoPreference.getString("username", null);
@@ -178,6 +190,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void startProfile(View view) {
+        view.startAnimation(animation);
         Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
         startActivity(intent);
     }

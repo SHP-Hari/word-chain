@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -40,5 +42,10 @@ public class HowToPlay extends AppCompatActivity {
         SharedPreferences preferences = newBase.getSharedPreferences("userinfo", MODE_PRIVATE);
         LANG_CURRENT = preferences.getString("Language", "en");
         super.attachBaseContext(MyContextWrapper.wrap(newBase, LANG_CURRENT));
+    }
+
+    public void startGame(View view) {
+        Intent wordChain = new Intent(HowToPlay.this, WordChainActivity.class);
+        startActivity(wordChain);
     }
 }

@@ -99,6 +99,7 @@ public class WordChainActivity extends AppCompatActivity {
     private int attemptId;
     Activity wordChainActivity;
     boolean alertviewing = false;
+    boolean isExtendDialogPopupShowed = false;
 
     public long getMAXIMUM_GAME_PLAY_TIME() {
         return MAXIMUM_GAME_PLAY_TIME;
@@ -410,7 +411,70 @@ public class WordChainActivity extends AppCompatActivity {
 
     private void timeUp(){
         countDownTimer.cancel();
-        endAttempt();
+        if (!isExtendDialogPopupShowed) {
+            extendTimePopUp();
+        }else { endAttempt(); }
+    }
+
+    private void extendTimePopUp() {
+        isExtendDialogPopupShowed = true;
+        alertviewing = true;
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog_card, null);
+        // Set the custom layout as alert dialog view
+        alertDialog.setView(dialogView);
+        // Get the custom alert dialog view widgets reference
+        Button btn_positive = dialogView.findViewById(R.id.dialog_positive_btn);
+        Button btn_negative = dialogView.findViewById(R.id.dialog_neutral_btn);
+        TextView title = dialogView.findViewById(R.id.dialog_titile);
+        TextView dialog_tv = dialogView.findViewById(R.id.dialog_tv);
+
+        title.setText(R.string.extendDialogTitle);
+        dialog_tv.setText(R.string.extendDialogDes);
+
+        userSubscriptionStatus = userPreference.getInt("userSubscriptionStatus", 0);
+        if (userSubscriptionStatus == 1){
+            //pro user
+            btn_positive.setText(R.string.extend);
+            btn_positive.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    timeLeftInMillis = GlabalValues.COUNTDOWN_IN_MILLIS_EXTEND_TIME;
+                    startCountDown();
+                    startMainGamePlayCountDown();
+                    alertviewing = false;
+                    alertDialog.cancel();
+                }
+            });
+        }else {
+            //not a pro user
+            btn_positive.setText(R.string.activatePro);
+            btn_positive.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent enter = new Intent(WordChainActivity.this, EnterMobileNumberActivity.class);
+                    startActivity(enter);
+                }
+            });
+        }
+
+        btn_negative.setText(R.string.finish_game);
+        btn_negative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertAttemptDetails(getAttemptId(), gameScore, wordsByApp, wordsByUser);
+                alertviewing = false;
+                alertDialog.cancel();
+            }
+        });
+
+        new Dialog(getApplicationContext());
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        if (!wordChainActivity.isFinishing()) {
+            alertDialog.show();
+        }
     }
 
     private void endAttempt(){

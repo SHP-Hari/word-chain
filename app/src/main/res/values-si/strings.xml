@@ -68,7 +68,7 @@
     <string name="proceed">ඉදිරියට යමු</string>
     <string name="enter_mobile_number">ඔබේ දුරකථන අංකය ඇතුලත් කරන්න</string>
     <string name="enter_mobile_number_des">ඔබේ දුරකථන අංකය පහත ඇතුලත් කර SMS මගින් ලැබෙන PIN එක ලබාගන්න.</string>
-    <string name="mobile_num_hint">+94(7X)-XXX-XXXX</string>
+    <string name="mobile_num_hint">(07X)-XXX-XXXX</string>
     <string name="pleaseTryAgain">නැවත උත්සාහ කරන්න </string>
     <string name="notReceivedActivationCode">PIN එක ලැබුනේ නැත</string>
     <string name="submit">Submit</string>
@@ -82,4 +82,14 @@
     <string name="err_something_wrong">යමක් වැරදී ඇත, කරුණාකර නැවත උත්සාහ කරන්න</string>
     <string name="subscriptionCodeNotFound">OTP එක වැරදි</string>
     <string name="subscriptionCodeExpired">Code එක කල් ඉකුත් වී ඇත</string>
+    <string name="you_are_pro_user">ඔබ Pro සාමාජිකයෙකි</string>
+    <string name="you_are_pro_user_des">Pro සාමාජිකයින් අනිත් අයට නැති පහසුකම් අත්විදිනු ලැබේ</string>
+    <string name="pro_cost_des">Word Chain සඳහා දිනකට රුපියල් පහක් සහ රජයේ බදු අය වේ</string>
+    <string name="extendDialogTitle">වෙලාව අවසානයි</string>
+    <string name="extendDialogDes"> Pro සක්‍රිය කර අමතර තත්පර 15 ක් ලබාගන්න.</string>
+    <string name="extend">15s ලබාගන්න</string>
+    <string name="activatePro">Pro සක්‍රිය කරන්න</string>
+    <string name="finish_game">අවසන් කරන්න</string>
+    <string name="winning_activity_dialog_title">Pro සක්‍රිය කර වචන මාලාව බලන්න</string>
+    <string name="winning_activity_dialog_des">වචන මාලාව බැලිය හැකි වන්නේ Pro සාමාජිකයින්ට පමණි කරුණාකර Word Chain Pro සක්‍රිය කරන්න</string>
 </resources>

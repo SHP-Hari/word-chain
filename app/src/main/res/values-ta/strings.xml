@@ -68,7 +68,7 @@
     <string name="proceed">தொடரவும்</string>
     <string name="enter_mobile_number">உங்கள் மொபைல் எண்ணை உள்ளிடவும்</string>
     <string name="enter_mobile_number_des">குறியீட்டு இலக்கத்தை பெற கீழே உங்கள் மொபைல் இலக்கத்தை உள்ளிடவும்</string>
-    <string name="mobile_num_hint">+94(7X)-XXX-XXXX</string>
+    <string name="mobile_num_hint">(07X)-XXX-XXXX</string>
     <string name="pleaseTryAgain">தயவு செய்து மீண்டும் முயற்சிக்கவும்</string>
     <string name="notReceivedActivationCode">குறியீட்டைப் பெறவில்லையா?</string>
     <string name="submit">சமர்ப்பிக்கவும்</string>
@@ -82,4 +82,14 @@
     <string name="err_something_wrong">ஏதோ தவறு நடந்துவிட்டது. மீண்டும் முயற்சிக்கவும்.</string>
     <string name="subscriptionCodeNotFound">தவறான OTP குறியீடு</string>
     <string name="subscriptionCodeExpired">குறியீடு காலாவதியானது</string>
+    <string name="you_are_pro_user">நீங்கள் ஒரு பிரீமியம் பயனர்</string>
+    <string name="you_are_pro_user_des">பிரீமியம் பயனர்கள் மற்ற பயனர்களிடம் இல்லாத அம்சங்களை அனுபவிக்கிறார்கள்</string>
+    <string name="pro_cost_des">Word Chain Pro ஒரு நாளைக்கு ஐந்து ரூபாய் மற்றும் வரி அறவிடப்படும். புரோவை அனுபவிக்கவும்</string>
+    <string name="extendDialogTitle">நேரம் முடிந்தது</string>
+    <string name="extendDialogDes">நீங்கள் Word Chain Pro வை செயல்படுத்தினால் நேரத்தை 15 வினாடிகள் நீட்டிக்க முடியும்.</string>
+    <string name="extend">நீட்டிக்க</string>
+    <string name="activatePro">புரோவை செயல்படுத்த</string>
+    <string name="finish_game">ரத்துசெய்</string>
+    <string name="winning_activity_dialog_title">சொற்களின் பட்டியலைக் காட்ட புரோவை செயல்படுத்தவும்</string>
+    <string name="winning_activity_dialog_des">புரோ பயனர்கள் மட்டுமே சொல் பட்டியலைக் காண முடியும். WordChain Pro ஐ செயல்படுத்தவும்.</string>
 </resources>

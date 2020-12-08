@@ -76,6 +76,7 @@ public class ActivationCodeFragment extends Fragment implements OtpReceivedInter
     SmsBroadcastReceiver mSmsBroadcastReceiver;
     FrameLayout fragmentPlaceholder;
     LinearLayout mobileNumLayout;
+    Button submitBtn;
     Button verifyCode;
     private EditText et1, et2, et3, et4, et5, et6;
     private EditText[] editTexts;
@@ -108,6 +109,7 @@ public class ActivationCodeFragment extends Fragment implements OtpReceivedInter
         userCarrier = this.getArguments().getString(EnterMobileNumberActivity.USER_CARRIER);
         fragmentPlaceholder = getActivity().findViewById(R.id.activationCodeFragment);
         mobileNumLayout = getActivity().findViewById(R.id.insertMobileNumLayout);
+        submitBtn = getActivity().findViewById(R.id.submitNumber);
         verifyCode = view.findViewById(R.id.activateCode);
         didnotGetCode = view.findViewById(R.id.didnotGetCode);
         countdown = view.findViewById(R.id.countdown);
@@ -433,6 +435,8 @@ public class ActivationCodeFragment extends Fragment implements OtpReceivedInter
         super.onDetach();
         mobileNumLayout.setVisibility(View.VISIBLE);
         fragmentPlaceholder.setVisibility(View.GONE);
+        submitBtn.setText(R.string.submit);
+        submitBtn.setEnabled(true);
     }
 
     public boolean checkConnection() {

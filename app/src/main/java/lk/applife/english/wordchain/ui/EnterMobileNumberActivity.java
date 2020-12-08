@@ -103,7 +103,7 @@ public class EnterMobileNumberActivity extends AppCompatActivity {
         if (!isValidContactNumber(mobile)){
             showMobileNumError(true, "Please enter a valid Mobile Number");
         }else{
-            if (!isValidSrilankanMobile(String.valueOf(mobile.charAt(1)))){
+            if (!isValidSrilankanMobile(String.valueOf(mobile.charAt(2)))){
                 showMobileNumError(true, "The number you have entered does not match any Srilankan Carrier");
             }else {
                 selectMobileCarrier(mobile);
@@ -112,7 +112,7 @@ public class EnterMobileNumberActivity extends AppCompatActivity {
     }
 
     private void selectMobileCarrier(String mobile) {
-        String carrier = mobile.substring(0,2);
+        String carrier = mobile.substring(1,3);
         switch (carrier){
             case "77" :
             case "76" :
@@ -134,7 +134,7 @@ public class EnterMobileNumberActivity extends AppCompatActivity {
                 throw new IllegalStateException("Unexpected value: " + carrier);
         }
         SharedPreferences.Editor editor = userpreference.edit();
-        editor.putString("userMobileNumber", getString(R.string.mobileNumberPrefix)+userMobileNumber);
+        editor.putString("userMobileNumber", getString(R.string.mobileNumberPrefix)+userMobileNumber.substring(1));
         getOTP();
     }
 
@@ -180,7 +180,7 @@ public class EnterMobileNumberActivity extends AppCompatActivity {
                 @Override
                 public byte[] getBody() {
                     String post_data;
-                    post_data = "{\"subscriber_phone_no\" : \"" + getString(R.string.mobileNumberPrefix)+userMobileNumber + "\",\n" +
+                    post_data = "{\"subscriber_phone_no\" : \"" + getString(R.string.mobileNumberPrefix)+userMobileNumber.substring(1) + "\",\n" +
                             "\"application_hash\" : \"" + BuildConfig.APP_HASH + "\",\n" +
                             "\"provider\" : \"" + userCarrier + "\",\n" +
                             "\"device\" : \"" + device_model + "\",\n" +
@@ -231,7 +231,7 @@ public class EnterMobileNumberActivity extends AppCompatActivity {
 
     public static boolean isValidContactNumber(String text) {
         CharSequence contactNumber = text;
-        return ((String) contactNumber).matches("^[7][0-9]{8}$");
+        return ((String) contactNumber).matches("^[0][7][0-9]{8}$");
     }
 
     public static boolean isValidSrilankanMobile(String num){

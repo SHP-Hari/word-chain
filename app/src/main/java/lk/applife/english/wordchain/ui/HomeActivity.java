@@ -7,11 +7,16 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -42,6 +47,7 @@ import lk.applife.english.wordchain.fragments.LanguageChange;
 import lk.applife.english.wordchain.utill.CustomSnackbar;
 import lk.applife.english.wordchain.utill.DatabaseHelper;
 import lk.applife.english.wordchain.utill.GlabalValues;
+import lk.applife.english.wordchain.utill.LocaleConfigurationUtil;
 import lk.applife.english.wordchain.utill.MyBounceInterpolator;
 import lk.applife.english.wordchain.utill.MyContextWrapper;
 
@@ -62,6 +68,9 @@ public class HomeActivity extends AppCompatActivity {
     String userMobile;
     ImageView userProfile;
     Animation animation;
+    TextView tvHomeSafetyTitle;
+    TextView tvActivatePro;
+    TextView tvActivateProDescription;
     int userSubscriptionStatus;
 
     @SuppressLint("SetTextI18n")
@@ -70,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        LocaleConfigurationUtil.adjustFontSize(this);
         animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
         MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
         animation.setInterpolator(interpolator);
@@ -78,6 +88,9 @@ public class HomeActivity extends AppCompatActivity {
         rootView = findViewById(android.R.id.content);
         openBottomSheet = (Button) findViewById(R.id.openLanguageSheetBtn);
         userWelcome = (TextView) findViewById(R.id.userWelcome);
+        tvHomeSafetyTitle = (TextView) findViewById(R.id.tvHomeSafetyTitle);
+        tvActivatePro = (TextView) findViewById(R.id.tvActivatePro);
+        tvActivateProDescription = (TextView) findViewById(R.id.tvActivateProDescription);
         userProfile = (ImageView) findViewById(R.id.userProfile);
         userProfile.startAnimation(connectingAnimation);
         userInfoPreference = getSharedPreferences(USER_INFO_PREFERENCES, Context.MODE_PRIVATE);
@@ -132,6 +145,7 @@ public class HomeActivity extends AppCompatActivity {
                                     editor.putInt("userSubscriptionStatus", 0);
                                 }
                                 editor.apply();
+                                getUserSubscriptionStatus();
                             }
                         } catch (JSONException e) {
                         }
@@ -155,6 +169,14 @@ public class HomeActivity extends AppCompatActivity {
 
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(20000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private void getUserSubscriptionStatus() {
+        int userSubscriptionStatus = userPreference.getInt("userSubscriptionStatus", 0);
+        if (userSubscriptionStatus == 1) {
+            tvActivatePro.setText(R.string.you_are_pro_user);
+            tvActivateProDescription.setText(R.string.you_are_pro_user_des);
+        }
     }
 
     public void startHowToPlay(View view) {

@@ -14,4 +14,5 @@ public class GlabalValues {
     public static final long GAME_PLAY_TIME_NON_PREMIUM = 120000;
     public static final long COUNTDOWN_IN_MILLIS_PREMIUM = 30000;
     public static final long COUNTDOWN_IN_MILLIS_NON_PREMIUM = 15000;
+    public static final long COUNTDOWN_IN_MILLIS_EXTEND_TIME = 15000;
 }

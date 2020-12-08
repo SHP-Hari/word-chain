@@ -69,7 +69,7 @@
     <string name="proceed">PROCEED</string>
     <string name="enter_mobile_number">Please enter your mobile number</string>
     <string name="enter_mobile_number_des">Enter your mobile number below and get SMS pin to activate</string>
-    <string name="mobile_num_hint">+94(7X)-XXX-XXXX</string>
+    <string name="mobile_num_hint">(07X)-XXX-XXXX</string>
     <string name="pleaseTryAgain">Please Try Again</string>
     <string name="notReceivedActivationCode">Did\'t received the code?</string>
     <string name="submit">Submit</string>
@@ -88,4 +88,14 @@
     <string name="err_something_wrong">Something went wrong. Try Again.</string>
     <string name="subscriptionCodeNotFound">Invalid OTP Code</string>
     <string name="subscriptionCodeExpired">Code has been Expired</string>
+    <string name="you_are_pro_user">You are a Premium User</string>
+    <string name="you_are_pro_user_des">Pro users enjoy features that other users don\'t have</string>
+    <string name="pro_cost_des">Word Chain Pro will cost five rupees plus tax per day. Enjoy Pro.</string>
+    <string name="extendDialogTitle">Time Up</string>
+    <string name="extendDialogDes">You can extend the time by 15 seconds if you activate pro.</string>
+    <string name="extend">Extend</string>
+    <string name="activatePro">ACTIVATE PRO</string>
+    <string name="finish_game">Finish Game</string>
+    <string name="winning_activity_dialog_title">Activate Pro to Show Words list</string>
+    <string name="winning_activity_dialog_des">Only Pro users can show the word list. Please activate the WordChain Pro.</string>
 </resources>

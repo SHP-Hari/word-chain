@@ -25,6 +25,13 @@ public class MyContextWrapper extends ContextWrapper {
     @SuppressWarnings("deprecation")
     public static ContextWrapper wrap(Context context, String language) {
         Configuration config = context.getResources().getConfiguration();
+        if (language.equals("si")){
+            config.fontScale = 0.8f;
+        }else if (language.equals("ta")){
+            config.fontScale = 0.7f;
+        }else {
+            config.fontScale = 1.0f;
+        }
         Locale sysLocale;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             sysLocale = getSystemLocale(config);

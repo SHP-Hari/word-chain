@@ -92,4 +92,6 @@
     <string name="finish_game">ரத்துசெய்</string>
     <string name="winning_activity_dialog_title">சொற்களின் பட்டியலைக் காட்ட புரோவை செயல்படுத்தவும்</string>
     <string name="winning_activity_dialog_des">புரோ பயனர்கள் மட்டுமே சொல் பட்டியலைக் காண முடியும். WordChain Pro ஐ செயல்படுத்தவும்.</string>
+    <string name="waiting_registration">செயல்படுத்த காத்திருக்கிறது</string>
+    <string name="already_registered">நீங்கள் ஏற்கனவே பதிவுசெய்தவர்.</string>
 </resources>

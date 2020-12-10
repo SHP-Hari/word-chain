@@ -97,6 +97,7 @@ public class HomeActivity extends AppCompatActivity {
         userPreference = this.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
         userName = userInfoPreference.getString("username", null);
         userMobile = userPreference.getString("userMobileNumber", null);
+        userSubscriptionStatus = userPreference.getInt("userSubscriptionStatus", 0);
         db = new DatabaseHelper(this);
 
         if (userName != null){
@@ -142,7 +143,11 @@ public class HomeActivity extends AppCompatActivity {
                                 if (initial.getString("subscription_status").equals(SUBSCRIBED)){
                                     editor.putInt("userSubscriptionStatus", 1);
                                 }else {
-                                    editor.putInt("userSubscriptionStatus", 0);
+                                    Log.d("TAG", "fetch else");
+                                    if (userSubscriptionStatus != 999) {
+                                        editor.putInt("userSubscriptionStatus", 0);
+                                    }else {
+                                    }
                                 }
                                 editor.apply();
                                 getUserSubscriptionStatus();
@@ -176,6 +181,8 @@ public class HomeActivity extends AppCompatActivity {
         if (userSubscriptionStatus == 1) {
             tvActivatePro.setText(R.string.you_are_pro_user);
             tvActivateProDescription.setText(R.string.you_are_pro_user_des);
+        }else if (userSubscriptionStatus == 999){
+            tvActivateProDescription.setText(R.string.waiting_registration);
         }
     }
 
@@ -225,6 +232,7 @@ public class HomeActivity extends AppCompatActivity {
         if (userName != null){
             userWelcome.setText(getString(R.string.hello) + userName);
         }
+//        initial();
     }
 
     @Override

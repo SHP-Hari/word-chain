@@ -103,6 +103,30 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/registrationWaitingLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="20"
+                        android:orientation="vertical"
+                        android:background="@color/pin_background"
+                        android:layout_marginEnd="8dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/registrationWaiting"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="@string/waiting_registration"
+                            android:textColor="@color/com_facebook_blue"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout

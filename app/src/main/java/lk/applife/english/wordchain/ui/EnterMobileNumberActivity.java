@@ -50,6 +50,7 @@ public class EnterMobileNumberActivity extends AppCompatActivity {
     public static final String USER_CARRIER = "user_carrier";
     public static final String ACTIVATION_CODE_FRAGMENT_TAG = "VERIFY_CODE";
     public static final String USERPREFERENCE = "userPreference";
+    public static final String REGISTERED_ALREADY = "E1351";
     private MaskEditText mPhoneNumber;
     Button submitBtn;
     private TextView mobileNumberError;
@@ -57,6 +58,7 @@ public class EnterMobileNumberActivity extends AppCompatActivity {
     LinearLayout insertMobileNumLayout;
     FrameLayout fragmentPlaceholder;
     LinearLayout lessonInfoLayout;
+    LinearLayout registrationWaitingLayout;
     String userMobileNumber;
     String userCarrier = null;
     SharedPreferences userpreference;
@@ -66,6 +68,7 @@ public class EnterMobileNumberActivity extends AppCompatActivity {
     private String os_name;
     CustomSnackbar snackbarNoConnection;
     ViewGroup rootView;
+    int userSubscriptionStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,7 @@ public class EnterMobileNumberActivity extends AppCompatActivity {
         mobileNumberError = (TextView) findViewById(R.id.mobileNumberError);
         activationCodeLayout = findViewById(R.id.activationCodeFragment);
         insertMobileNumLayout = (LinearLayout) findViewById(R.id.insertMobileNumLayout);
+        registrationWaitingLayout = (LinearLayout) findViewById(R.id.registrationWaitingLayout);
         submitBtn.setOnClickListener(submitButtonClickListener);
 
         userpreference = this.getSharedPreferences(USERPREFERENCE, Context.MODE_PRIVATE);
@@ -84,6 +88,12 @@ public class EnterMobileNumberActivity extends AppCompatActivity {
         device_model = userpreference.getString("deviceModel", "Android device");
         device_os = userpreference.getString("deviceOS", "Android device");
         os_name = userpreference.getString("deviceOSName", "Android device");
+        userSubscriptionStatus = userpreference.getInt("userSubscriptionStatus", 0);
+        if (userSubscriptionStatus == 999){
+            registrationWaitingLayout.setVisibility(View.VISIBLE);
+        }else {
+            registrationWaitingLayout.setVisibility(View.GONE);
+        }
     }
 
     View.OnClickListener submitButtonClickListener = new View.OnClickListener() {
@@ -135,6 +145,7 @@ public class EnterMobileNumberActivity extends AppCompatActivity {
         }
         SharedPreferences.Editor editor = userpreference.edit();
         editor.putString("userMobileNumber", getString(R.string.mobileNumberPrefix)+userMobileNumber.substring(1));
+        editor.apply();
         getOTP();
     }
 
@@ -161,8 +172,14 @@ public class EnterMobileNumberActivity extends AppCompatActivity {
                                 } else {
                                     submitBtn.setText(R.string.submit);
                                     submitBtn.setEnabled(true);
-//                                    String msg = jsonObject.getString("msg");
-                                    showMobileNumError(true, getString(R.string.err_something_wrong));
+                                    String err_code = jsonObject.getString("err_code");
+                                    switch (err_code) {
+                                        case REGISTERED_ALREADY :
+                                            showMobileNumError(true, getString(R.string.already_registered));
+                                            break;
+                                        default:
+                                            showMobileNumError(true, getString(R.string.err_something_wrong));
+                                    }
                                     closeKeyboard();
                                 }
 

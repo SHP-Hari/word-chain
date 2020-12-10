@@ -63,6 +63,8 @@ import lk.applife.english.wordchain.utill.CustomSnackbar;
 import lk.applife.english.wordchain.utill.GlabalValues;
 import lk.applife.english.wordchain.utill.SmsBroadcastReceiver;
 
+import static lk.applife.english.wordchain.ui.HomeActivity.USER_PREFERENCES;
+
 
 public class ActivationCodeFragment extends Fragment implements OtpReceivedInterface {
 
@@ -96,6 +98,8 @@ public class ActivationCodeFragment extends Fragment implements OtpReceivedInter
     private boolean mTimerRunning;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
     CustomSnackbar snackbarNoConnection;
+    SharedPreferences userPreference;
+    int userSubscriptionStatus;
 
     public ActivationCodeFragment() {
         // Required empty public constructor
@@ -124,6 +128,8 @@ public class ActivationCodeFragment extends Fragment implements OtpReceivedInter
         insertCodeLayout = (LinearLayout) view.findViewById(R.id.insertCodeLayout);
         didnotGetCodeLayout = (LinearLayout) view.findViewById(R.id.didnotGetCodeLayout);
         coundownLayout = (LinearLayout) view.findViewById(R.id.coundownLayout);
+        userPreference = getActivity().getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
+        userSubscriptionStatus = userPreference.getInt("userSubscriptionStatus", 0);
 
         didnotGetCodeLayout.setVisibility(View.GONE);
         mSmsBroadcastReceiver = new SmsBroadcastReceiver();
@@ -333,6 +339,10 @@ public class ActivationCodeFragment extends Fragment implements OtpReceivedInter
 
                                     if (!error) {
                                         Snackbar.make(insertCodeLayout, "Code Verified Successfully", Snackbar.LENGTH_SHORT).show();
+                                        SharedPreferences.Editor editor = userPreference.edit();
+                                        editor.putInt("userSubscriptionStatus", 999);
+                                        editor.apply();
+                                        Log.d("TAG", "uss frm activation code : "+ userPreference.getInt("userSubscriptionStatus", 0));
                                         Intent intent = new Intent(getContext(), HomeActivity.class);
                                         startActivity(intent);
                                     } else {

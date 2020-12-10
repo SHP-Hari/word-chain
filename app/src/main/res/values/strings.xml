@@ -98,4 +98,6 @@
     <string name="finish_game">Finish Game</string>
     <string name="winning_activity_dialog_title">Activate Pro to Show Words list</string>
     <string name="winning_activity_dialog_des">Only Pro users can show the word list. Please activate the WordChain Pro.</string>
+    <string name="waiting_registration">Awaiting for Registration</string>
+    <string name="already_registered">You are already Registered.</string>
 </resources>

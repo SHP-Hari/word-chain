@@ -92,4 +92,6 @@
     <string name="finish_game">අවසන් කරන්න</string>
     <string name="winning_activity_dialog_title">Pro සක්‍රිය කර වචන මාලාව බලන්න</string>
     <string name="winning_activity_dialog_des">වචන මාලාව බැලිය හැකි වන්නේ Pro සාමාජිකයින්ට පමණි කරුණාකර Word Chain Pro සක්‍රිය කරන්න</string>
+    <string name="waiting_registration">Awaiting for Registration</string>
+    <string name="already_registered">ඔබ දැනටමත් ලියාපදිංචි වී ඇත.</string>
 </resources>

@@ -333,19 +333,19 @@ public class WordChainActivity extends AppCompatActivity {
 
     private void addViewAppWord(LinearLayout viewAppWord, final String appWordChar) {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                80,
-                80
+                120,
+                120
         );
         layoutParams.rightMargin = 1;
         layoutParams.leftMargin = 1;
 
         final TextView textView = new TextView(this);
         textView.setLayoutParams(layoutParams);
-        textView.setBackground(this.getResources().getDrawable(R.drawable.alpha_app_bg));
+        textView.setBackground(this.getResources().getDrawable(R.drawable.bgtile));
 //        textView.setTextColor(this.getResources().getColor(R.color.word_chain_user_input));
         textView.setGravity(Gravity.CENTER);
         textView.setText(appWordChar);
-        textView.setTextSize(30);
+        textView.setTextSize(20);
         textView.setAllCaps(true);
         textView.setPadding(4, 2, 4, 2);
 
@@ -530,19 +530,19 @@ public class WordChainActivity extends AppCompatActivity {
 
     private void addViewUserWord(LinearLayout viewUserWord, final String userWordChar) {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                70,
-                LinearLayout.LayoutParams.WRAP_CONTENT
+                120,
+                120
         );
         layoutParams.rightMargin = 1;
         layoutParams.leftMargin = 1;
 
         final TextView textView = new TextView(this);
         textView.setLayoutParams(layoutParams);
-        textView.setBackground(this.getResources().getDrawable(R.drawable.alpha_user_bg));
-        textView.setTextColor(this.getResources().getColor(R.color.black));
+        textView.setBackground(this.getResources().getDrawable(R.drawable.bgtile_user));
+        textView.setTextColor(this.getResources().getColor(R.color.white));
         textView.setGravity(Gravity.CENTER);
         textView.setText(userWordChar);
-        textView.setTextSize(30);
+        textView.setTextSize(20);
         textView.setAllCaps(true);
         textView.setPadding(4, 2, 4, 2);
 
